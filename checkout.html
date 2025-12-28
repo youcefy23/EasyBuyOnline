@@ -1,0 +1,1091 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Secure Checkout | EasyBuyOnline</title>
+    <style>
+        /* زر الرجوع الأحمر */
+        .back-button {
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            background-color: #e74c3c;
+            color: white;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+            box-shadow: 0 4px 12px rgba(231, 76, 60, 0.4);
+            z-index: 1000;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+        }
+        .back-button:hover {
+            background-color: #c0392b;
+            transform: scale(1.1);
+            box-shadow: 0 6px 16px rgba(231, 76, 60, 0.6);
+        }
+        .back-button:active {
+            transform: scale(0.95);
+        }
+        .back-button svg {
+            width: 30px;
+            height: 30px;
+            filter: drop-shadow(0 2px 2px rgba(0,0,0,0.2));
+        }
+        .back-button svg path {
+            stroke: white;
+            stroke-width: 3;
+            stroke-linecap: round;
+            stroke-linejoin: round;
+            fill: none;
+        }
+
+        /* Reset and Base Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+        }
+        
+        body {
+            color: #333;
+            line-height: 1.6;
+            background-color: #f8f9fa;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        /* Header */
+        .site-header {
+            background: #fff;
+            border-bottom: 1px solid #eaeaea;
+            padding: 20px 0;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+        }
+        
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            font-size: 24px;
+            font-weight: 700;
+            color: #2e7d32;
+            text-decoration: none;
+        }
+        
+        .secure-checkout-badge {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            color: #2e7d32;
+            font-weight: 600;
+        }
+        
+        .secure-checkout-badge .lock-icon {
+            font-size: 20px;
+        }
+        
+        /* Main Layout */
+        .checkout-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+            padding: 40px 0;
+            min-height: calc(100vh - 200px);
+        }
+        
+        /* Left Column - Customer Form */
+        .customer-form-section {
+            background: #fff;
+            padding: 40px;
+            border-radius: 12px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.08);
+            order: 1;
+        }
+        
+        /* Right Column - Order Summary */
+        .order-summary-section {
+            background: #fff;
+            padding: 40px;
+            border-radius: 12px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.08);
+            border: 2px solid #2e7d32;
+            height: fit-content;
+            position: sticky;
+            top: 20px;
+            order: 2;
+        }
+        
+        .section-title {
+            font-size: 24px;
+            font-weight: 700;
+            margin-bottom: 30px;
+            color: #222;
+            padding-bottom: 15px;
+            border-bottom: 2px solid #2e7d32;
+        }
+        
+        .form-group {
+            margin-bottom: 24px;
+        }
+        
+        .form-label {
+            display: block;
+            font-weight: 600;
+            margin-bottom: 8px;
+            color: #333;
+            font-size: 15px;
+        }
+        
+        .required {
+            color: #d32f2f;
+        }
+        
+        .form-input {
+            width: 100%;
+            padding: 14px 16px;
+            border: 2px solid #ddd;
+            border-radius: 8px;
+            font-size: 16px;
+            transition: all 0.3s;
+            min-height: 44px;
+        }
+        
+        .form-input:focus {
+            outline: none;
+            border-color: #2e7d32;
+            box-shadow: 0 0 0 3px rgba(46, 125, 50, 0.1);
+        }
+        
+        .form-input:disabled {
+            background-color: #f5f5f5;
+            color: #666;
+            cursor: not-allowed;
+        }
+        
+        select.form-input {
+            appearance: none;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' fill='%23333' viewBox='0 0 16 16'%3E%3Cpath d='M7.247 11.14L2.451 5.658C1.885 5.013 2.345 4 3.204 4h9.592a1 1 0 0 1 .753 1.659l-4.796 5.48a1 1 0 0 1-1.506 0z'/%3E%3C/svg%3E");
+            background-repeat: no-repeat;
+            background-position: right 16px center;
+            padding-right: 40px;
+        }
+        
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+        
+        /* Order Summary Styling */
+        .order-title {
+            font-size: 20px;
+            font-weight: 700;
+            margin-bottom: 25px;
+            color: #222;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .order-title .cart-icon {
+            font-size: 24px;
+            color: #2e7d32;
+        }
+        
+        /* Product Info */
+        .product-info {
+            background: #f8f8f8;
+            padding: 20px;
+            border-radius: 8px;
+            margin-bottom: 25px;
+            border-left: 4px solid #2e7d32;
+        }
+        
+        .product-name {
+            font-size: 18px;
+            font-weight: 700;
+            margin-bottom: 8px;
+            color: #222;
+        }
+        
+        .product-details {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+        
+        .product-size {
+            color: #666;
+            font-size: 15px;
+            font-weight: 600;
+        }
+        
+        .shipping-note {
+            color: #2e7d32;
+            font-size: 14px;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            margin-top: 10px;
+            padding-top: 10px;
+            border-top: 1px dashed #ddd;
+        }
+        
+        .shipping-note .check-icon {
+            font-size: 16px;
+        }
+        
+        /* Price Breakdown - UPDATED: removed tax section */
+        .price-breakdown {
+            margin: 30px 0;
+        }
+        
+        .price-row {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 12px;
+            font-size: 16px;
+            padding: 10px 0;
+        }
+        
+        .price-row.subtotal {
+            font-weight: 700;
+            margin: 20px 0;
+            padding: 15px 0;
+        }
+        
+        .price-row.total {
+            font-size: 24px;
+            font-weight: 800;
+            color: #2e7d32;
+            padding: 20px 0;
+            border-top: 2px solid #2e7d32;
+            margin-top: 20px;
+        }
+        
+        /* Terms & Conditions - MOVED to right column */
+        .terms-section {
+            background: #fff9c4;
+            padding: 20px;
+            border-radius: 8px;
+            margin: 25px 0;
+            border: 1px solid #ffd54f;
+        }
+        
+        .terms-agreement {
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+        }
+        
+        .terms-checkbox {
+            margin-top: 3px;
+            min-width: 20px;
+            min-height: 20px;
+            cursor: pointer;
+        }
+        
+        .terms-text {
+            font-size: 14px;
+            line-height: 1.5;
+        }
+        
+        .terms-links {
+            color: #2e7d32;
+            font-weight: 600;
+            text-decoration: none;
+        }
+        
+        .terms-links:hover {
+            text-decoration: underline;
+        }
+        
+        /* Button Styles */
+        .checkout-button {
+            width: 100%;
+            padding: 18px;
+            background: #2e7d32;
+            border: none;
+            color: white;
+            font-size: 18px;
+            font-weight: 700;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s;
+            margin-top: 10px;
+            min-height: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .checkout-button:hover {
+            background: #1b5e20;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(46, 125, 50, 0.3);
+        }
+        
+        .checkout-button:disabled {
+            background: #cccccc;
+            cursor: not-allowed;
+            transform: none;
+            box-shadow: none;
+        }
+        
+        /* Loading Spinner */
+        .spinner {
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            border: 3px solid rgba(255,255,255,.3);
+            border-radius: 50%;
+            border-top-color: white;
+            animation: spin 1s ease-in-out infinite;
+            margin-right: 10px;
+        }
+        
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+        
+        /* Form Validation */
+        .error-message {
+            color: #d32f2f;
+            font-size: 14px;
+            margin-top: 5px;
+            display: none;
+        }
+        
+        .form-input.error {
+            border-color: #d32f2f;
+        }
+        
+        .success-message {
+            color: #2e7d32;
+            background: #e8f5e9;
+            padding: 20px;
+            border-radius: 8px;
+            margin-top: 15px;
+            text-align: center;
+            display: none;
+            border: 1px solid #c8e6c9;
+        }
+        
+        /* Security Badge - MOVED to right column */
+        .security-badge {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+            margin-top: 25px;
+            color: #666;
+            font-size: 14px;
+            padding: 15px;
+            background: #f8f9fa;
+            border-radius: 8px;
+            border: 1px solid #eaeaea;
+        }
+        
+        .security-icon {
+            color: #2e7d32;
+            font-size: 20px;
+        }
+        
+        /* Payment Methods */
+        .payment-methods {
+            display: flex;
+            justify-content: center;
+            gap: 25px;
+            margin-top: 25px;
+            padding-top: 25px;
+            border-top: 1px solid #eaeaea;
+        }
+        
+        .payment-icon {
+            height: 24px;
+            width: auto;
+            opacity: 0.8;
+            transition: opacity 0.3s;
+        }
+        
+        .payment-icon:hover {
+            opacity: 1;
+        }
+        
+        /* Footer */
+        .footer-main {
+            background: #333;
+            color: white;
+            padding: 40px 0;
+            margin-top: 60px;
+        }
+        
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 30px;
+            list-style: none;
+        }
+        
+        .footer-links a {
+            color: white;
+            text-decoration: none;
+            font-size: 14px;
+            transition: color 0.3s;
+        }
+        
+        .footer-links a:hover {
+            color: #4caf50;
+        }
+        
+        .copyright {
+            text-align: center;
+            margin-top: 20px;
+            color: #aaa;
+            font-size: 13px;
+        }
+        
+        /* ✅ الهاتف فقط - النموذج أولاً ثم الملخص تحته */
+        @media (max-width: 768px) {
+            .checkout-container {
+                grid-template-columns: 1fr;
+                gap: 30px;
+            }
+            
+            .customer-form-section,
+            .order-summary-section {
+                padding: 30px;
+            }
+            
+            .customer-form-section {
+                order: 1;
+            }
+            
+            .order-summary-section {
+                order: 2;
+                position: static;
+                margin-top: 20px;
+            }
+            
+            .form-row {
+                grid-template-columns: 1fr;
+                gap: 15px;
+            }
+            
+            .section-title {
+                font-size: 22px;
+            }
+            
+            .price-row.total {
+                font-size: 22px;
+            }
+            
+            .header-content {
+                flex-direction: column;
+                gap: 15px;
+                text-align: center;
+            }
+            
+            .payment-methods {
+                gap: 20px;
+            }
+            
+            .payment-icon {
+                height: 20px;
+            }
+            
+            .footer-links {
+                flex-direction: column;
+                align-items: center;
+                gap: 20px;
+            }
+            
+            /* زر الرجوع على الهاتف */
+            .back-button {
+                width: 50px;
+                height: 50px;
+                top: 15px;
+                left: 15px;
+            }
+            .back-button svg {
+                width: 25px;
+                height: 25px;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .customer-form-section,
+            .order-summary-section {
+                padding: 20px;
+            }
+            
+            .section-title {
+                font-size: 20px;
+                margin-bottom: 25px;
+            }
+            
+            .checkout-button {
+                padding: 16px;
+                font-size: 16px;
+            }
+            
+            .terms-agreement {
+                align-items: flex-start;
+            }
+            
+            .terms-checkbox {
+                min-width: 18px;
+                min-height: 18px;
+            }
+            
+            .security-badge {
+                flex-direction: column;
+                text-align: center;
+                gap: 8px;
+            }
+            
+            .payment-icon {
+                height: 18px;
+            }
+        }
+        
+        /* Utility Classes */
+        .hidden {
+            display: none !important;
+        }
+        
+        .text-center {
+            text-align: center;
+        }
+        
+        .mb-20 {
+            margin-bottom: 20px;
+        }
+    </style>
+</head>
+<body>
+    <!-- زر الرجوع الأحمر -->
+    <a href="javascript:history.back()" class="back-button" title="Go Back">
+        <svg viewBox="0 0 32 32">
+            <path d="M20 8 L12 16 L20 24"/>
+        </svg>
+    </a>
+
+    <!-- Header -->
+    <header class="site-header">
+        <div class="container">
+            <div class="header-content">
+                <a href="index.html" class="logo">EasyBuyOnline</a>
+                <div class="secure-checkout-badge">
+                    <span class="lock-icon">🔒</span>
+                    <span>Secure Checkout</span>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Checkout Content -->
+    <main class="container">
+        <div class="checkout-container">
+            <!-- Left Column: Customer Form -->
+            <div class="customer-form-section">
+                <h2 class="section-title">Shipping Information</h2>
+                
+                <form id="checkoutForm" action="https://formspree.io/f/meeqjqnn" method="POST">
+                    <!-- Customer Information -->
+                    <div class="form-group">
+                        <label for="name" class="form-label">Full Name <span class="required">*</span></label>
+                        <input type="text" id="name" name="name" class="form-input" required 
+                               placeholder="John Smith">
+                        <div class="error-message" id="nameError"></div>
+                    </div>
+                    
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="phone" class="form-label">Phone Number <span class="required">*</span></label>
+                            <input type="tel" id="phone" name="phone" class="form-input" required 
+                                   placeholder="(555) 123-4567">
+                            <div class="error-message" id="phoneError"></div>
+                        </div>
+                    </div>
+                    
+                    <!-- Shipping Address -->
+                    <div class="form-group">
+                        <label for="address" class="form-label">Street Address <span class="required">*</span></label>
+                        <input type="text" id="address" name="address" class="form-input" required 
+                               placeholder="123 Main St">
+                        <div class="error-message" id="addressError"></div>
+                    </div>
+                    
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="city" class="form-label">City <span class="required">*</span></label>
+                            <input type="text" id="city" name="city" class="form-input" required 
+                               placeholder="New York">
+                            <div class="error-message" id="cityError"></div>
+                        </div>
+                        
+                        <!-- State Field in Form (kept as required shipping information) -->
+                        <div class="form-group">
+                            <label for="formState" class="form-label">State <span class="required">*</span></label>
+                            <select id="formState" name="formState" class="form-input" required>
+                                <option value="">Select State</option>
+                                <option value="AL">Alabama</option>
+                                <option value="AK">Alaska</option>
+                                <option value="AZ">Arizona</option>
+                                <option value="AR">Arkansas</option>
+                                <option value="CA">California</option>
+                                <option value="CO">Colorado</option>
+                                <option value="CT">Connecticut</option>
+                                <option value="DE">Delaware</option>
+                                <option value="FL">Florida</option>
+                                <option value="GA">Georgia</option>
+                                <option value="HI">Hawaii</option>
+                                <option value="ID">Idaho</option>
+                                <option value="IL">Illinois</option>
+                                <option value="IN">Indiana</option>
+                                <option value="IA">Iowa</option>
+                                <option value="KS">Kansas</option>
+                                <option value="KY">Kentucky</option>
+                                <option value="LA">Louisiana</option>
+                                <option value="ME">Maine</option>
+                                <option value="MD">Maryland</option>
+                                <option value="MA">Massachusetts</option>
+                                <option value="MI">Michigan</option>
+                                <option value="MN">Minnesota</option>
+                                <option value="MS">Mississippi</option>
+                                <option value="MO">Missouri</option>
+                                <option value="MT">Montana</option>
+                                <option value="NE">Nebraska</option>
+                                <option value="NV">Nevada</option>
+                                <option value="NH">New Hampshire</option>
+                                <option value="NJ">New Jersey</option>
+                                <option value="NM">New Mexico</option>
+                                <option value="NY">New York</option>
+                                <option value="NC">North Carolina</option>
+                                <option value="ND">North Dakota</option>
+                                <option value="OH">Ohio</option>
+                                <option value="OK">Oklahoma</option>
+                                <option value="OR">Oregon</option>
+                                <option value="PA">Pennsylvania</option>
+                                <option value="RI">Rhode Island</option>
+                                <option value="SC">South Carolina</option>
+                                <option value="SD">South Dakota</option>
+                                <option value="TN">Tennessee</option>
+                                <option value="TX">Texas</option>
+                                <option value="UT">Utah</option>
+                                <option value="VT">Vermont</option>
+                                <option value="VA">Virginia</option>
+                                <option value="WA">Washington</option>
+                                <option value="WV">West Virginia</option>
+                                <option value="WI">Wisconsin</option>
+                                <option value="WY">Wyoming</option>
+                            </select>
+                            <div class="error-message" id="formStateError"></div>
+                        </div>
+                    </div>
+                    
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="zip" class="form-label">ZIP Code <span class="required">*</span></label>
+                            <input type="text" id="zip" name="zip" class="form-input" required 
+                                   placeholder="10001" pattern="[0-9]{5}">
+                            <div class="error-message" id="zipError"></div>
+                        </div>
+                        
+                        <!-- Country Field -->
+                        <div class="form-group">
+                            <label for="country" class="form-label">Country</label>
+                            <input type="text" id="country" name="country" class="form-input" 
+                                   value="United States" disabled>
+                        </div>
+                    </div>
+                    
+                    <!-- Hidden Fields for Formspree -->
+                    <input type="hidden" id="basePrice" name="basePrice" value="34.99">
+                    <input type="hidden" id="salesTax" name="salesTax" value="0.00">
+                    <input type="hidden" id="totalPrice" name="totalPrice" value="34.99">
+                    <input type="hidden" id="productName" name="productName" value="GrillMaster Pro Cast Iron Grill Pan">
+                    <input type="hidden" id="productSize" name="productSize" value="Large">
+                    <input type="hidden" id="transactionId" name="transactionId">
+                    <input type="hidden" id="selectedState" name="selectedState" value="">
+                </form>
+            </div>
+            
+            <!-- Right Column: Order Summary - UPDATED -->
+            <div class="order-summary-section">
+                <h2 class="order-title">
+                    <span class="cart-icon">🛒</span>
+                    Order Summary
+                </h2>
+                
+                <!-- Product Information -->
+                <div class="product-info">
+                    <div class="product-name" id="displayProductName">GrillMaster Pro Cast Iron Grill Pan</div>
+                    <div class="product-details">
+                        <span class="product-size" id="displayProductSize">Size: Large</span>
+                        <span class="product-price" id="displayBasePrice">$34.99</span>
+                    </div>
+                    <div class="shipping-note">
+                        <span class="check-icon">✓</span>
+                        Shipping included in price
+                    </div>
+                </div>
+                
+                <!-- Price Breakdown - UPDATED: removed tax calculation -->
+                <div class="price-breakdown">
+                    <div class="price-row">
+                        <span>Product Price</span>
+                        <span id="priceBase">$34.99</span>
+                    </div>
+                    
+                    <div class="price-row subtotal">
+                        <span>Subtotal</span>
+                        <span id="priceSubtotal">$34.99</span>
+                    </div>
+                    
+                    <div class="price-row total">
+                        <span>Total Amount</span>
+                        <span id="priceTotal">$34.99</span>
+                    </div>
+                </div>
+                
+                <!-- Payment Methods -->
+                <div class="payment-methods">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/5/5e/Visa_Inc._logo.svg" 
+                         alt="Visa" class="payment-icon">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/2/2a/Mastercard-logo.svg" 
+                         alt="Mastercard" class="payment-icon">
+                </div>
+                
+                <!-- Terms & Conditions Agreement - MOVED to right column -->
+                <div class="terms-section">
+                    <div class="terms-agreement">
+                        <input type="checkbox" id="termsAgreement" name="termsAgreement" class="terms-checkbox" required>
+                        <label for="termsAgreement" class="terms-text">
+                            I agree to the <a href="terms-conditions.html" class="terms-links">Terms & Conditions</a>, 
+                            <a href="privacy-policy.html" class="terms-links">Privacy Policy</a>, 
+                            <a href="shipping-policy.html" class="terms-links">Shipping Policy</a>, and 
+                            <a href="refund-return-policy.html" class="terms-links">Refund & Return Policy</a>. 
+                            I understand that by proceeding with this purchase, I accept all terms and authorize the transaction.
+                        </label>
+                    </div>
+                    <div class="error-message" id="termsError"></div>
+                </div>
+                
+                <!-- Submit Button - MOVED to right column -->
+                <button type="submit" class="checkout-button" id="submitBtn" disabled form="checkoutForm">
+                    <span id="btnText">Complete Purchase</span>
+                </button>
+                
+                <!-- Success Message - MOVED to right column -->
+                <div class="success-message" id="successMessage">
+                    ✅ Order submitted successfully! Redirecting to secure payment...
+                </div>
+                
+                <!-- Security Badge - MOVED to right column -->
+                <div class="security-badge">
+                    <span class="security-icon">🔒</span>
+                    <span>256-bit SSL Encryption · PCI Compliant · Your Information is Secure</span>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer-main">
+        <div class="container">
+            <ul class="footer-links">
+                <li><a href="privacy-policy.html">Privacy Policy</a></li>
+                <li><a href="shipping-policy.html">Shipping Policy</a></li>
+                <li><a href="refund-return-policy.html">Refund & Return Policy</a></li>
+                <li><a href="terms-conditions.html">Terms & Conditions</a></li>
+                <li><a href="contact.html">Contact</a></li>
+            </ul>
+            <div class="copyright">
+                © 2025 EasyBuyOnline. All rights reserved.
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Get URL parameters
+            const urlParams = new URLSearchParams(window.location.search);
+            const price = parseFloat(urlParams.get('price')) || 34.99;
+            const size = urlParams.get('size') || 'Large';
+            const productName = urlParams.get('product') || 'GrillMaster Pro Cast Iron Grill Pan';
+
+            // Initialize form elements
+            const formStateSelect = document.getElementById('formState'); // State in form
+            const termsCheckbox = document.getElementById('termsAgreement');
+            const submitBtn = document.getElementById('submitBtn');
+            const btnText = document.getElementById('btnText');
+            
+            // Price display elements
+            const displayProductName = document.getElementById('displayProductName');
+            const displayProductSize = document.getElementById('displayProductSize');
+            const displayBasePrice = document.getElementById('displayBasePrice');
+            const priceBase = document.getElementById('priceBase');
+            const priceSubtotal = document.getElementById('priceSubtotal');
+            const priceTotal = document.getElementById('priceTotal');
+            
+            // Hidden form fields
+            const basePriceInput = document.getElementById('basePrice');
+            const salesTaxInput = document.getElementById('salesTax');
+            const totalPriceInput = document.getElementById('totalPrice');
+            const productNameInput = document.getElementById('productName');
+            const productSizeInput = document.getElementById('productSize');
+            const selectedStateInput = document.getElementById('selectedState');
+            const transactionIdInput = document.getElementById('transactionId');
+            const form = document.getElementById('checkoutForm');
+            
+            // Initialize values from URL parameters
+            displayProductName.textContent = productName;
+            displayProductSize.textContent = `Size: ${size}`;
+            displayBasePrice.textContent = `$${price.toFixed(2)}`;
+            priceBase.textContent = `$${price.toFixed(2)}`;
+            priceSubtotal.textContent = `$${price.toFixed(2)}`;
+            priceTotal.textContent = `$${price.toFixed(2)}`;
+            
+            // Set hidden field values
+            basePriceInput.value = price.toFixed(2);
+            productNameInput.value = productName;
+            productSizeInput.value = size;
+            salesTaxInput.value = "0.00";
+            totalPriceInput.value = price.toFixed(2);
+            
+            // Generate transaction ID
+            const transactionId = 'TXN' + Date.now() + Math.floor(Math.random() * 1000);
+            transactionIdInput.value = transactionId;
+            
+            // Event Listeners for state field
+            formStateSelect.addEventListener('change', function() {
+                selectedStateInput.value = this.value;
+                validateForm();
+            });
+            
+            // Set initial state if provided in URL
+            if (urlParams.get('state')) {
+                const stateFromURL = urlParams.get('state');
+                formStateSelect.value = stateFromURL;
+                selectedStateInput.value = stateFromURL;
+            }
+            
+            // Update button text
+            updateButtonText();
+            
+            // التحقق عند خروج التركيز من الحقول
+            const validateField = function(input) {
+                const errorElement = document.getElementById(input.id + 'Error');
+                if (!errorElement) return;
+                
+                // إخفاء رسالة الخطأ أولاً
+                errorElement.style.display = 'none';
+                errorElement.textContent = '';
+                input.classList.remove('error');
+                
+                // التحقق فقط إذا كان الحقل غير فارغ
+                if (input.value.trim()) {
+                    if (input.id === 'zip' && !/^\d{5}$/.test(input.value)) {
+                        input.classList.add('error');
+                        errorElement.textContent = 'Please enter a valid 5-digit ZIP code';
+                        errorElement.style.display = 'block';
+                    } else if (input.id === 'phone' && !isValidPhone(input.value)) {
+                        input.classList.add('error');
+                        errorElement.textContent = 'Please enter a valid phone number';
+                        errorElement.style.display = 'block';
+                    }
+                }
+            };
+            
+            // إضافة event listeners للتحقق عند خروج التركيز
+            const inputsToValidate = ['name', 'phone', 'address', 'city', 'formState', 'zip'];
+            inputsToValidate.forEach(fieldId => {
+                const input = document.getElementById(fieldId);
+                if (input) {
+                    input.addEventListener('blur', function() {
+                        validateField(this);
+                        validateForm();
+                    });
+                    
+                    // التحقق أثناء الكتابة لحقول معينة
+                    if (fieldId === 'phone' || fieldId === 'zip') {
+                        input.addEventListener('input', function() {
+                            validateField(this);
+                            validateForm();
+                        });
+                    }
+                }
+            });
+            
+            // التحقق من الشروط عند التغيير
+            termsCheckbox.addEventListener('change', function() {
+                document.getElementById('termsError').style.display = 'none';
+                document.getElementById('termsError').textContent = '';
+                validateForm();
+            });
+            
+            // Form submission
+            form.addEventListener('submit', function(e) {
+                e.preventDefault();
+                
+                if (validateForm(true)) {
+                    submitForm();
+                }
+            });
+            
+            // Update button text with current total
+            function updateButtonText() {
+                const total = parseFloat(totalPriceInput.value) || price;
+                btnText.textContent = `Complete Purchase - $${total.toFixed(2)}`;
+            }
+            
+            // Form validation - updated to not show errors on page load
+            function validateForm(isSubmit = false) {
+                let isValid = true;
+                
+                const requiredFields = [
+                    { id: 'name', name: 'Full Name' },
+                    { id: 'phone', name: 'Phone Number' },
+                    { id: 'address', name: 'Street Address' },
+                    { id: 'city', name: 'City' },
+                    { id: 'formState', name: 'State' },
+                    { id: 'zip', name: 'ZIP Code' }
+                ];
+                
+                requiredFields.forEach(field => {
+                    const input = document.getElementById(field.id);
+                    const errorElement = document.getElementById(field.id + 'Error');
+                    
+                    if (isSubmit && !input.value.trim()) {
+                        input.classList.add('error');
+                        if (errorElement) {
+                            errorElement.textContent = `${field.name} is required`;
+                            errorElement.style.display = 'block';
+                        }
+                        isValid = false;
+                    }
+                    else if (input.value.trim()) {
+                        if (field.id === 'zip' && !/^\d{5}$/.test(input.value)) {
+                            input.classList.add('error');
+                            if (errorElement) {
+                                errorElement.textContent = 'Please enter a valid 5-digit ZIP code';
+                                errorElement.style.display = 'block';
+                            }
+                            isValid = false;
+                        } else if (field.id === 'phone' && !isValidPhone(input.value)) {
+                            input.classList.add('error');
+                            if (errorElement) {
+                                errorElement.textContent = 'Please enter a valid phone number';
+                                errorElement.style.display = 'block';
+                            }
+                            isValid = false;
+                        } else {
+                            input.classList.remove('error');
+                            if (errorElement) {
+                                errorElement.style.display = 'none';
+                            }
+                        }
+                    } else {
+                        input.classList.remove('error');
+                        if (errorElement) {
+                            errorElement.style.display = 'none';
+                        }
+                    }
+                });
+                
+                if (isSubmit && !termsCheckbox.checked) {
+                    document.getElementById('termsError').textContent = 'You must agree to the terms and conditions';
+                    document.getElementById('termsError').style.display = 'block';
+                    isValid = false;
+                } else {
+                    if (!isSubmit || termsCheckbox.checked) {
+                        document.getElementById('termsError').style.display = 'none';
+                    }
+                }
+                
+                const allFieldsFilled = requiredFields.every(field => {
+                    const input = document.getElementById(field.id);
+                    return input.value.trim() !== '';
+                });
+                
+                const stateSelected = formStateSelect.value !== '';
+                const termsChecked = termsCheckbox.checked;
+                
+                submitBtn.disabled = !(allFieldsFilled && stateSelected && termsChecked);
+                
+                return isValid;
+            }
+            
+            function isValidPhone(phone) {
+                const re = /^[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,6}$/;
+                return re.test(phone.replace(/\s/g, ''));
+            }
+            
+            // Form submission with Formspree
+            async function submitForm() {
+                const submitBtn = document.getElementById('submitBtn');
+                const btnText = document.getElementById('btnText');
+                const successMessage = document.getElementById('successMessage');
+                
+                submitBtn.disabled = true;
+                btnText.innerHTML = '<span class="spinner"></span> Processing Order...';
+                
+                try {
+                    const formData = new FormData(form);
+                    
+                    const formspreeEndpoint = 'https://formspree.io/f/meeqjqnn';
+                    
+                    const response = await fetch(formspreeEndpoint, {
+                        method: 'POST',
+                        body: formData,
+                        headers: {
+                            'Accept': 'application/json'
+                        }
+                    });
+                    
+                    if (response.ok) {
+                        successMessage.style.display = 'block';
+                        form.reset();
+                        
+                        setTimeout(() => {
+                            const total = parseFloat(totalPriceInput.value) || price;
+                            const skrillURL = `https://pay.skrill.com/?sid=${transactionId}&amount=${total}`;
+                            window.location.href = skrillURL;
+                        }, 2000);
+                    } else {
+                        throw new Error('Form submission failed');
+                    }
+                } catch (error) {
+                    console.error('Error:', error);
+                    alert('There was an error processing your order. Please try again.');
+                    
+                    submitBtn.disabled = false;
+                    updateButtonText();
+                }
+            }
+            
+            updateButtonText();
+        });
+    </script>
+</body>
+</html>

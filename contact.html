@@ -1,0 +1,872 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EasyBuyOnline - Contact Us</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* Base Styles - Consistent with Homepage */
+        :root {
+            --primary-color: #2c3e50;
+            --secondary-color: #e74c3c;
+            --accent-color: #3498db;
+            --light-color: #ecf0f1;
+            --dark-color: #2c3e50;
+            --gray-color: #95a5a6;
+            --shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            --transition: all 0.3s ease;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            color: #333;
+            line-height: 1.6;
+            background-color: #f9f9f9;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        ul {
+            list-style: none;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2.2rem;
+            color: var(--primary-color);
+            margin-bottom: 2.5rem;
+            position: relative;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 3px;
+            background-color: var(--secondary-color);
+        }
+
+        .btn {
+            display: inline-block;
+            background-color: var(--secondary-color);
+            color: white;
+            padding: 12px 28px;
+            border-radius: 4px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            transition: var(--transition);
+            border: none;
+            cursor: pointer;
+            font-size: 0.95rem;
+        }
+
+        .btn:hover {
+            background-color: #c0392b;
+            transform: translateY(-3px);
+            box-shadow: var(--shadow);
+        }
+
+        /* Header */
+        header {
+            background-color: white;
+            box-shadow: var(--shadow);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 20px;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: #000000;
+        }
+
+        .logo span {
+            color: var(--secondary-color);
+        }
+
+        nav ul {
+            display: flex;
+            gap: 30px;
+        }
+
+        nav a {
+            font-weight: 600;
+            font-size: 1.05rem;
+            position: relative;
+            padding: 5px 0;
+        }
+
+        nav a:hover, nav a.active {
+            color: var(--secondary-color);
+        }
+
+        nav a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background-color: var(--secondary-color);
+            transition: var(--transition);
+        }
+
+        nav a:hover::after, nav a.active::after {
+            width: 100%;
+        }
+
+        .mobile-toggle {
+            display: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+
+        /* Back Button - تعديل الموقع */
+        .back-button {
+            position: fixed;
+            top: 85px;
+            left: 20px;
+            background-color: #e74c3c;
+            color: white;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+            box-shadow: 0 4px 12px rgba(231, 76, 60, 0.4);
+            z-index: 1001;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+        }
+        
+        .back-button:hover {
+            background-color: #c0392b;
+            transform: scale(1.1);
+            box-shadow: 0 6px 16px rgba(231, 76, 60, 0.6);
+        }
+        
+        .back-button:active {
+            transform: scale(0.95);
+        }
+        
+        .back-button svg {
+            width: 30px;
+            height: 30px;
+            filter: drop-shadow(0 2px 2px rgba(0,0,0,0.2));
+        }
+        
+        .back-button svg path {
+            stroke: white;
+            stroke-width: 3;
+            stroke-linecap: round;
+            stroke-linejoin: round;
+            fill: none;
+        }
+
+        /* Contact Section */
+        .contact-section {
+            flex: 1;
+            padding: 80px 0;
+            background-color: white;
+        }
+
+        .contact-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 50px;
+            align-items: start;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .contact-info {
+            background-color: #f8f9fa;
+            padding: 40px;
+            border-radius: 10px;
+            box-shadow: var(--shadow);
+        }
+
+        .contact-info h3 {
+            color: var(--primary-color);
+            font-size: 1.5rem;
+            margin-bottom: 25px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid var(--secondary-color);
+        }
+
+        .info-item {
+            display: flex;
+            align-items: flex-start;
+            margin-bottom: 25px;
+        }
+
+        .info-icon {
+            background-color: var(--secondary-color);
+            color: white;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 15px;
+            flex-shrink: 0;
+        }
+
+        .info-content h4 {
+            color: var(--primary-color);
+            margin-bottom: 5px;
+            font-size: 1.1rem;
+        }
+
+        .info-content p {
+            color: #666;
+        }
+
+        .store-email {
+            color: var(--secondary-color);
+            font-weight: 600;
+            font-size: 1.1rem;
+            display: inline-block;
+            margin-top: 5px;
+        }
+
+        .response-time {
+            background-color: white;
+            padding: 20px;
+            border-radius: 8px;
+            margin-top: 30px;
+            border-left: 4px solid #2ecc71;
+        }
+
+        .response-time h4 {
+            color: var(--primary-color);
+            margin-bottom: 10px;
+        }
+
+        .response-time p {
+            color: #666;
+            text-align: center;
+            font-weight: 600;
+            font-size: 1.1rem;
+            color: #27ae60;
+        }
+
+        /* Contact Form */
+        .contact-form-container {
+            background-color: white;
+            padding: 40px;
+            border-radius: 10px;
+            box-shadow: var(--shadow);
+            border-top: 4px solid var(--secondary-color);
+        }
+
+        .contact-form-container h3 {
+            color: var(--primary-color);
+            font-size: 1.5rem;
+            margin-bottom: 25px;
+            text-align: center;
+        }
+
+        .form-group {
+            margin-bottom: 25px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: var(--primary-color);
+        }
+
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 12px 15px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 1rem;
+            transition: var(--transition);
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: var(--accent-color);
+            box-shadow: 0 0 0 2px rgba(52, 152, 219, 0.2);
+        }
+
+        .form-group textarea {
+            min-height: 150px;
+            resize: vertical;
+            font-family: inherit;
+        }
+
+        .form-submit {
+            text-align: center;
+        }
+
+        .form-submit .btn {
+            width: 100%;
+            padding: 14px;
+            font-size: 1rem;
+        }
+
+        .btn-loading {
+            opacity: 0.7;
+            cursor: not-allowed;
+        }
+
+        /* Success Message */
+        .success-message {
+            display: none;
+            background-color: #d4edda;
+            color: #155724;
+            padding: 15px;
+            border-radius: 4px;
+            border: 1px solid #c3e6cb;
+            margin-top: 20px;
+            text-align: center;
+        }
+
+        .success-message i {
+            color: #28a745;
+            margin-right: 10px;
+            font-size: 1.2rem;
+        }
+
+        .error-message {
+            display: none;
+            background-color: #f8d7da;
+            color: #721c24;
+            padding: 15px;
+            border-radius: 4px;
+            border: 1px solid #f5c6cb;
+            margin-top: 20px;
+            text-align: center;
+        }
+
+        .error-message i {
+            color: #dc3545;
+            margin-right: 10px;
+            font-size: 1.2rem;
+        }
+
+        /* Footer */
+        footer {
+            background-color: var(--primary-color);
+            color: white;
+            padding: 60px 0 30px;
+            margin-top: auto;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+
+        .footer-logo {
+            font-size: 1.8rem;
+            font-weight: 700;
+            margin-bottom: 20px;
+        }
+
+        .footer-links h4 {
+            font-size: 1.3rem;
+            margin-bottom: 20px;
+            position: relative;
+        }
+
+        .footer-links h4::after {
+            content: '';
+            position: absolute;
+            bottom: -8px;
+            left: 0;
+            width: 40px;
+            height: 2px;
+            background-color: var(--secondary-color);
+        }
+
+        .footer-links ul li {
+            margin-bottom: 12px;
+        }
+
+        .footer-links a:hover {
+            color: var(--secondary-color);
+            padding-left: 5px;
+            transition: var(--transition);
+        }
+
+        .copyright {
+            text-align: center;
+            padding-top: 30px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            font-size: 0.9rem;
+            color: #bbb;
+        }
+
+        /* Responsive Styles */
+        @media (max-width: 992px) {
+            .contact-container {
+                grid-template-columns: 1fr;
+                gap: 40px;
+            }
+            
+            .section-title {
+                font-size: 1.8rem;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .header-container {
+                padding: 15px;
+            }
+            
+            nav ul {
+                position: fixed;
+                top: 70px;
+                left: -100%;
+                flex-direction: column;
+                background-color: white;
+                width: 100%;
+                text-align: center;
+                padding: 20px 0;
+                box-shadow: 0 10px 15px rgba(0, 0, 0, 0.1);
+                transition: var(--transition);
+                z-index: 999;
+            }
+            
+            nav ul.active {
+                left: 0;
+            }
+            
+            nav ul li {
+                margin: 15px 0;
+            }
+            
+            .mobile-toggle {
+                display: block;
+            }
+            
+            .contact-info,
+            .contact-form-container {
+                padding: 30px;
+            }
+            
+            .section-title {
+                font-size: 1.8rem;
+            }
+            
+            .back-button {
+                width: 50px;
+                height: 50px;
+                top: 70px;
+                left: 15px;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .contact-section {
+                padding: 60px 0;
+            }
+            
+            .contact-info,
+            .contact-form-container {
+                padding: 20px;
+            }
+            
+            .section-title {
+                font-size: 1.6rem;
+            }
+            
+            .btn {
+                padding: 10px 20px;
+                font-size: 0.9rem;
+            }
+            
+            .info-item {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+            
+            .info-icon {
+                margin-bottom: 10px;
+            }
+            
+            .footer-content {
+                grid-template-columns: 1fr;
+                gap: 30px;
+            }
+            
+            .back-button {
+                top: 65px;
+                width: 45px;
+                height: 45px;
+            }
+        }
+
+        @media (max-width: 400px) {
+            .section-title {
+                font-size: 1.4rem;
+            }
+            
+            .contact-info h3,
+            .contact-form-container h3 {
+                font-size: 1.3rem;
+            }
+            
+            .store-email {
+                font-size: 1rem;
+                word-break: break-all;
+            }
+            
+            .back-button {
+                top: 60px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- زر الرجوع الأحمر - تم تعديل موقعه -->
+    <a href="javascript:history.back()" class="back-button" title="Go Back">
+        <svg viewBox="0 0 32 32">
+            <path d="M20 8 L12 16 L20 24"/>
+        </svg>
+    </a>
+
+    <!-- Header -->
+    <header>
+        <div class="container header-container">
+            <a href="index.html" class="logo">EasyBuy<span>Online</span></a>
+            
+            <div class="mobile-toggle" id="mobileToggle">
+                <i class="fas fa-bars"></i>
+            </div>
+            
+            <nav>
+                <ul id="navMenu">
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="shop.html">Shop</a></li>
+                    <!-- تم حذف رابط Contact من الهيدر -->
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Contact Section -->
+    <section class="contact-section">
+        <div class="container">
+            <h2 class="section-title">Contact EasyBuyOnline</h2>
+            
+            <div class="contact-container">
+                <!-- Contact Information -->
+                <div class="contact-info">
+                    <h3>Contact Information</h3>
+                    
+                    <div class="info-item">
+                        <div class="info-icon">
+                            <i class="fas fa-envelope"></i>
+                        </div>
+                        <div class="info-content">
+                            <h4>Email Address</h4>
+                            <p>For inquiries, support, and business communications:</p>
+                            <a href="mailto:support@easybuyonline.com" class="store-email">
+                                support@easybuyonline.com
+                            </a>
+                        </div>
+                    </div>
+                    
+                    <div class="info-item">
+                        <div class="info-icon">
+                            <i class="fas fa-headset"></i>
+                        </div>
+                        <div class="info-content">
+                            <h4>Customer Support</h4>
+                            <p>Assistance is available for product inquiries, order questions, and information about kitchen products.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="info-item">
+                        <div class="info-icon">
+                            <i class="fas fa-shipping-fast"></i>
+                        </div>
+                        <div class="info-content">
+                            <h4>Shipping & Orders</h4>
+                            <p>For inquiries about order status, shipping details, or delivery updates, include your order number with your message.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="response-time">
+                        <h4>Response Time</h4>
+                        <p>Your message will receive a response within 24 hours, all week long.</p>
+                    </div>
+                </div>
+                
+                <!-- Contact Form -->
+                <div class="contact-form-container">
+                    <h3>Send Your Message Below</h3>
+                    
+                    <form id="contactForm" action="https://formspree.io/f/meeqjqnn" method="POST">
+                        <!-- Formspree Hidden Fields -->
+                        <input type="hidden" name="_subject" value="New Contact Message from EasyBuyOnline">
+                        <input type="hidden" name="_replyto" value="{{email}}">
+                        <input type="text" name="_gotcha" style="display:none">
+                        
+                        <div class="form-group">
+                            <label for="customerName">Your Name *</label>
+                            <input 
+                                type="text" 
+                                id="customerName" 
+                                name="name" 
+                                placeholder="Enter your full name" 
+                                required
+                            >
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="customerEmail">Email Address *</label>
+                            <input 
+                                type="email" 
+                                id="customerEmail" 
+                                name="email" 
+                                placeholder="Enter your email address" 
+                                required
+                            >
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="customerMessage">Your Message *</label>
+                            <textarea 
+                                id="customerMessage" 
+                                name="message" 
+                                placeholder="Please describe your inquiry, question, or feedback in detail..." 
+                                required
+                            ></textarea>
+                        </div>
+                        
+                        <div class="form-submit">
+                            <button type="submit" class="btn">
+                                <i class="fas fa-paper-plane"></i> Send Message
+                            </button>
+                        </div>
+                    </form>
+                    
+                    <div id="successMessage" class="success-message">
+                        <i class="fas fa-check-circle"></i>
+                        <span>Thank you! Your message has been sent successfully. We'll respond to you within 24 hours.</span>
+                    </div>
+                    
+                    <div id="errorMessage" class="error-message">
+                        <i class="fas fa-exclamation-circle"></i>
+                        <span>There was an error sending your message. Please try again or email us directly at support@easybuyonline.com</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-about">
+                    <div class="footer-logo">EasyBuyOnline</div>
+                    <p>Premium kitchenware and cooking essentials for modern homes and professional kitchens.</p>
+                </div>
+                
+                <div class="footer-links">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="shop.html">Shop</a></li>
+                        <!-- تم حذف رابط Contact من هنا -->
+                    </ul>
+                </div>
+                
+                <div class="footer-links">
+                    <h4>Our Policies</h4>
+                    <ul>
+                        <li><a href="privacy-policy.html">Privacy Policy</a></li>
+                        <li><a href="terms-conditions.html">Terms & Conditions</a></li>
+                        <li><a href="shipping-policy.html">Shipping Policy</a></li>
+                        <li><a href="refund-return-policy.html">Refund & Return Policy</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="copyright">
+                <p>&copy; 2025 EasyBuyOnline. All rights reserved.</p>
+                <p>Contact Page | EasyBuyOnline Customer Support</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile Navigation Toggle
+        const mobileToggle = document.getElementById('mobileToggle');
+        const navMenu = document.getElementById('navMenu');
+        
+        mobileToggle.addEventListener('click', () => {
+            navMenu.classList.toggle('active');
+            mobileToggle.innerHTML = navMenu.classList.contains('active') 
+                ? '<i class="fas fa-times"></i>' 
+                : '<i class="fas fa-bars"></i>';
+        });
+        
+        // Close mobile menu when clicking a link
+        document.querySelectorAll('#navMenu a').forEach(link => {
+            link.addEventListener('click', () => {
+                navMenu.classList.remove('active');
+                mobileToggle.innerHTML = '<i class="fas fa-bars"></i>';
+            });
+        });
+        
+        // Contact Form Submission with Formspree
+        const contactForm = document.getElementById('contactForm');
+        const successMessage = document.getElementById('successMessage');
+        const errorMessage = document.getElementById('errorMessage');
+        
+        contactForm.addEventListener('submit', async function(e) {
+            e.preventDefault();
+            
+            // Hide previous messages
+            successMessage.style.display = 'none';
+            errorMessage.style.display = 'none';
+            
+            // Get submit button
+            const submitBtn = this.querySelector('button[type="submit"]');
+            const originalText = submitBtn.innerHTML;
+            
+            // Show loading state
+            submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Sending...';
+            submitBtn.classList.add('btn-loading');
+            submitBtn.disabled = true;
+            
+            try {
+                // Collect form data
+                const formData = new FormData(this);
+                
+                // Send to Formspree
+                const response = await fetch(this.action, {
+                    method: 'POST',
+                    body: formData,
+                    headers: {
+                        'Accept': 'application/json'
+                    }
+                });
+                
+                if (response.ok) {
+                    // Success
+                    successMessage.style.display = 'block';
+                    
+                    // Reset form
+                    contactForm.reset();
+                    
+                    // Scroll to success message
+                    successMessage.scrollIntoView({ 
+                        behavior: 'smooth', 
+                        block: 'center' 
+                    });
+                    
+                    console.log('Form submitted successfully to Formspree');
+                } else {
+                    // Formspree error
+                    errorMessage.style.display = 'block';
+                    errorMessage.scrollIntoView({ 
+                        behavior: 'smooth', 
+                        block: 'center' 
+                    });
+                    console.error('Formspree submission failed');
+                }
+            } catch (error) {
+                // Network error
+                errorMessage.style.display = 'block';
+                errorMessage.scrollIntoView({ 
+                    behavior: 'smooth', 
+                    block: 'center' 
+                });
+                console.error('Network error:', error);
+            } finally {
+                // Restore button
+                submitBtn.innerHTML = originalText;
+                submitBtn.classList.remove('btn-loading');
+                submitBtn.disabled = false;
+            }
+        });
+        
+        // Highlight active navigation link
+        document.addEventListener('DOMContentLoaded', () => {
+            const currentPage = window.location.pathname.split('/').pop();
+            const navLinks = document.querySelectorAll('#navMenu a');
+            
+            navLinks.forEach(link => {
+                const linkPage = link.getAttribute('href');
+                if (linkPage === currentPage || (currentPage === '' && linkPage === 'index.html')) {
+                    link.classList.add('active');
+                } else {
+                    link.classList.remove('active');
+                }
+            });
+            
+            // Smooth scrolling for anchor links
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    
+                    const targetId = this.getAttribute('href');
+                    if (targetId === '#') return;
+                    
+                    const targetElement = document.querySelector(targetId);
+                    if (targetElement) {
+                        window.scrollTo({
+                            top: targetElement.offsetTop - 80,
+                            behavior: 'smooth'
+                        });
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>
