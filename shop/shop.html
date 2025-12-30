@@ -1,1 +1,302 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shop - EasyBuyOnline</title>
+    <style>
+        :root {
+            --primary-color: #2c3e50;
+            --secondary-color: #7f8c8d;
+            --accent-color: #16a085;
+            --light-color: #ecf0f1;
+            --spacing-unit: 1.5rem;
+            --max-width: 1200px;
+            --border-radius: 4px;
+        }
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            margin: 0;
+            padding: 0;
+            background-color: #f9f9f9;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            overflow-x: hidden;
+        }
+        .container {
+            max-width: var(--max-width);
+            margin: 0 auto;
+            padding: 0 var(--spacing-unit);
+            flex: 1;
+            width: 100%;
+        }
+        /* Header Navigation */
+        header {
+            background-color: white;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            width: 100%;
+        }
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 0;
+            max-width: var(--max-width);
+            margin: 0 auto;
+            width: 100%;
+            padding-left: var(--spacing-unit);
+            padding-right: var(--spacing-unit);
+        }
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 800;
+            color: var(--primary-color);
+            text-decoration: none;
+        }
+        .logo span {
+            color: #e74c3c;
+            font-weight: 800;
+        }
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+        }
+        .nav-links a {
+            color: var(--primary-color);
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s;
+            padding: 0.5rem 0;
+            position: relative;
+        }
+        .nav-links a:hover {
+            color: var(--accent-color);
+        }
+        .nav-links a.active {
+            color: var(--accent-color);
+        }
+        .nav-links a.active::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background-color: var(--accent-color);
+        }
+        /* Page Header */
+        .page-header {
+            text-align: center;
+            padding: 4rem 0 3rem;
+        }
+        .page-header h1 {
+            color: var(--primary-color);
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+        .page-header p {
+            color: var(--secondary-color);
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        /* Products Section */
+        .products-section {
+            padding: 2rem 0 6rem;
+        }
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 3rem;
+            max-width: 100%;
+            margin: 0 auto;
+        }
+        .product-card {
+            background: white;
+            border-radius: var(--border-radius);
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            transition: transform 0.3s, box-shadow 0.3s;
+            max-width: 100%;
+        }
+        .product-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+        }
+        .product-image {
+            width: 100%;
+            height: auto;
+            object-fit: contain;
+            display: block;
+        }
+        .product-info {
+            padding: 1.5rem;
+            text-align: center;
+        }
+        .product-info h3 {
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+            font-size: 1.3rem;
+            min-height: 3.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .view-btn {
+            display: inline-block;
+            background-color: var(--accent-color);
+            color: white;
+            padding: 0.8rem 2rem;
+            border-radius: var(--border-radius);
+            text-decoration: none;
+            font-weight: 500;
+            transition: background-color 0.3s;
+            border: none;
+            cursor: pointer;
+            font-size: 1rem;
+        }
+        .view-btn:hover {
+            background-color: #138d75;
+        }
+        /* Footer */
+        footer {
+            background-color: var(--primary-color);
+            color: white;
+            padding: 3rem var(--spacing-unit);
+            margin-top: auto;
+        }
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+        .footer-links a {
+            color: var(--light-color);
+            text-decoration: none;
+        }
+        .footer-links a:hover {
+            text-decoration: underline;
+            color: white;
+        }
+        .legal-line {
+            font-size: 0.9rem;
+            color: #bdc3c7;
+            margin-top: 2rem;
+            border-top: 1px solid #34495e;
+            padding-top: 2rem;
+            text-align: center;
+        }
+        /* Responsive */
+        @media (max-width: 768px) {
+            .nav-container {
+                flex-direction: column;
+                gap: 1rem;
+                padding: 1rem;
+            }
+            .nav-links {
+                gap: 1.5rem;
+            }
+            .page-header {
+                padding: 3rem 0 2rem;
+            }
+            .page-header h1 {
+                font-size: 2rem;
+            }
+            .products-grid {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+        }
+        @media (max-width: 480px) {
+            .nav-links {
+                flex-direction: column;
+                gap: 1rem;
+                text-align: center;
+            }
+            .footer-links {
+                flex-direction: column;
+                gap: 1rem;
+                text-align: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header Navigation -->
+    <header>
+        <div class="container nav-container">
+            <a href="index.html" class="logo">EasyBuy<span>Online</span></a>
+            <nav class="nav-links">
+                <a href="index.html">Home</a>
+                <a href="shop.html" class="active">Shop</a>
+                <a href="contact.html">Contact</a>
+            </nav>
+        </div>
+    </header>
 
+    <!-- Page Header -->
+    <section class="page-header">
+        <div class="container">
+            <h1>Shop Kitchen Products</h1>
+            <p>Browse the selection of professional kitchen essentials from EasyBuyOnline</p>
+        </div>
+    </section>
+
+    <!-- Products Section -->
+    <section class="products-section">
+        <div class="container">
+            <div class="products-grid">
+                <!-- Product Card 1 -->
+                <div class="product-card">
+                    <img src="https://i.ibb.co/5xcNhC23/f2460ab9-ca14-448d-a2c5-9d2a38d9cef8.jpg" 
+                         alt="GrillMaster Pro Cast Iron Grill Pan" class="product-image">
+                    <div class="product-info">
+                        <h3>GrillMaster Pro Cast Iron Grill Pan<br>$34.99</h3>
+                        <a href="product-1.html" class="view-btn">View Product</a>
+                    </div>
+                </div>
+
+                <!-- Product Card 2 -->
+                <div class="product-card">
+                    <img src="https://i.ibb.co/XfxgsCdg/45167a7f-e393-47ac-9d62-e873e1fb5a41.jpg" 
+                         alt="Stainless Pro Cooking Pot" class="product-image">
+                    <div class="product-info">
+                        <h3>Stainless Pro Cooking Pot<br>$37.99</h3>
+                        <a href="product-2.html" class="view-btn">View Product</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-links">
+                <a href="index.html">Home</a>
+                <a href="privacy-policy.html">Privacy Policy</a>
+                <a href="shipping-policy.html">Shipping Policy</a>
+                <a href="refund-return-policy.html">Refund & Return Policy</a>
+                <a href="terms-conditions.html">Terms & Conditions</a>
+<a href="about.html">About</a>
+                <a href="contact.html">Contact</a>
+            </div>
+            <div class="legal-line">
+                &copy; 2025 EasyBuyOnline. All rights reserved.
+            </div>
+        </div>
+    </footer>
+</body>
+</html>
