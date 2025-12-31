@@ -1,0 +1,1367 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5, user-scalable=yes">
+    <title>GrillMaster Pro Cast Iron Grill Pan | EasyBuyOnline</title>
+    <style>
+        /* Reset and Base Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+        }
+        
+        body {
+            color: #333;
+            line-height: 1.6;
+            background-color: #fff;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        /* Header */
+        .site-header {
+            background: #fff;
+            border-bottom: 1px solid #eaeaea;
+            padding: 20px 0;
+        }
+        
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            font-size: 24px;
+            font-weight: 700;
+            color: #2e7d32;
+        }
+        
+        .header-links {
+            display: flex;
+            gap: 30px;
+        }
+        
+        .header-link {
+            color: #333;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 16px;
+            transition: color 0.2s;
+        }
+        
+        .header-link:hover {
+            color: #2e7d32;
+        }
+        
+        /* Main Product Layout */
+        .product-main {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 50px;
+            padding: 40px 0;
+        }
+        
+        /* Gallery Section */
+        .gallery-section {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+        
+        .main-image-container {
+            width: 100%;
+            height: 500px;
+            border: 1px solid #e0e0e0;
+            border-radius: 8px;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: #f9f9f9;
+            touch-action: pan-y;
+            user-select: none;
+            position: relative;
+        }
+        
+        .main-image {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            display: block;
+        }
+        
+        .thumbnail-gallery {
+            display: flex;
+            gap: 10px;
+            justify-content: center;
+            overflow-x: auto;
+            padding: 10px 0;
+            -webkit-overflow-scrolling: touch;
+            scroll-snap-type: x mandatory;
+            scroll-behavior: smooth;
+        }
+        
+        .thumbnail {
+            width: 80px;
+            height: 80px;
+            border: 2px solid #e0e0e0;
+            border-radius: 6px;
+            overflow: hidden;
+            cursor: pointer;
+            background: #f9f9f9;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+            touch-action: manipulation;
+            min-height: 44px;
+            min-width: 44px;
+            scroll-snap-align: center;
+        }
+        
+        .thumbnail.active {
+            border-color: #2e7d32;
+        }
+        
+        .thumbnail img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            display: block;
+        }
+        
+        /* Rating Block */
+        .rating-block {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+        }
+        
+        .star-rating {
+            color: #e0e0e0;
+            display: flex;
+            gap: 2px;
+            position: relative;
+            font-size: 20px;
+        }
+        
+        .star-rating .filled-stars {
+            color: #2e7d32;
+            position: absolute;
+            top: 0;
+            left: 0;
+            white-space: nowrap;
+            overflow: hidden;
+            width: 90%; /* 4.5 stars = 90% */
+        }
+        
+        .star-rating .empty-stars {
+            color: #e0e0e0;
+        }
+        
+        .rating-value {
+            font-weight: 600;
+            font-size: 18px;
+        }
+        
+        /* Product Info */
+        .product-title {
+            font-size: 32px;
+            font-weight: 700;
+            margin-bottom: 20px;
+            color: #222;
+        }
+        
+        .price-section {
+            margin-bottom: 25px;
+        }
+        
+        .current-price {
+            font-size: 36px;
+            font-weight: 700;
+            color: #2e7d32;
+            margin-bottom: 5px;
+        }
+        
+        .original-price {
+            font-size: 20px;
+            color: #888;
+            text-decoration: line-through;
+            margin-right: 10px;
+        }
+        
+        .discount-badge {
+            background: #ff5722;
+            color: white;
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-size: 14px;
+            font-weight: 600;
+        }
+        
+        /* Size Selector */
+        .size-selector {
+            margin-bottom: 30px;
+        }
+        
+        .size-label {
+            display: block;
+            font-weight: 600;
+            margin-bottom: 12px;
+            font-size: 16px;
+        }
+        
+        .size-options {
+            display: flex;
+            gap: 15px;
+        }
+        
+        .size-option {
+            padding: 12px 30px;
+            border: 2px solid #ddd;
+            border-radius: 6px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s;
+            text-align: center;
+            min-width: 120px;
+            min-height: 44px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .size-option:hover {
+            border-color: #2e7d32;
+        }
+        
+        .size-option.selected {
+            background: #2e7d32;
+            color: white;
+            border-color: #2e7d32;
+        }
+        
+        /* Purchase Area */
+        .purchase-area {
+            margin-bottom: 30px;
+        }
+        
+        .buy-button {
+            width: 100%;
+            padding: 14px;
+            background: #2e7d32;
+            border: none;
+            color: white;
+            font-size: 16px;
+            font-weight: 700;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.2s;
+            margin-bottom: 20px;
+            min-height: 44px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .buy-button:hover {
+            background: #1b5e20;
+        }
+        
+        .payment-icons {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-top: 15px;
+        }
+        
+        .payment-icon {
+            height: 24px;
+            width: auto;
+        }
+        
+        /* Description Section */
+        .description-section {
+            padding: 40px 0;
+            border-top: 1px solid #eaeaea;
+        }
+        
+        .section-title {
+            font-size: 24px;
+            font-weight: 700;
+            margin-bottom: 20px;
+            color: #222;
+        }
+        
+        .product-description {
+            margin-bottom: 30px;
+            font-size: 16px;
+            line-height: 1.7;
+        }
+        
+        .description-images {
+            margin: 30px 0;
+        }
+        
+        .image-with-caption {
+            margin-bottom: 40px;
+        }
+        
+        .desc-image-box {
+            border: 1px solid #e0e0e0;
+            border-radius: 8px;
+            overflow: hidden;
+            height: 250px;
+            background: #f9f9f9;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 15px;
+            touch-action: pan-y;
+            user-select: none;
+        }
+        
+        .desc-image-box img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            display: block;
+        }
+        
+        .image-caption {
+            text-align: center;
+            color: #666;
+            font-size: 14px;
+            font-style: italic;
+            padding: 0 10px;
+            line-height: 1.5;
+        }
+        
+        /* Product Details Table */
+        .product-details {
+            margin: 40px 0;
+        }
+        
+        .details-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+            table-layout: fixed;
+        }
+        
+        .details-table th,
+        .details-table td {
+            padding: 16px 20px;
+            text-align: left;
+            border-bottom: 1px solid #eaeaea;
+            word-wrap: break-word;
+        }
+        
+        .details-table th {
+            font-weight: 600;
+            background: #f8f8f8;
+            width: 40%;
+        }
+        
+        /* Physical Specs */
+        .physical-specs {
+            background: #f8f8f8;
+            padding: 20px;
+            border-radius: 8px;
+            margin: 30px 0;
+        }
+        
+        .specs-title {
+            font-weight: 600;
+            margin-bottom: 15px;
+            color: #2e7d32;
+        }
+        
+        .specs-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 15px;
+        }
+        
+        .spec-item {
+            background: white;
+            padding: 15px;
+            border-radius: 6px;
+            border: 1px solid #e0e0e0;
+        }
+        
+        /* Reviews Section - UPDATED STYLES */
+        .reviews-section {
+            padding: 40px 0;
+            border-top: 1px solid #eaeaea;
+        }
+        
+        .review {
+            padding: 25px 0;
+            border-bottom: 1px solid #eaeaea;
+        }
+        
+        .review:last-of-type {
+            border-bottom: none;
+        }
+        
+        .review-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 12px;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        
+        .reviewer-name {
+            font-weight: 600;
+            font-size: 16px;
+        }
+        
+        .review-date {
+            color: #666;
+            font-size: 14px;
+        }
+        
+        /* NEW STAR STYLES - Applied only to review stars */
+        .review .review-stars {
+            display: inline-flex;
+            gap: 6px;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+        
+        .review .review-stars .star {
+            --size: 18px;
+            --fill: 0%;
+            width: var(--size);
+            height: var(--size);
+            display: inline-block;
+            background: linear-gradient(90deg, #2e7d32 var(--fill), #e6e6e6 var(--fill));
+            -webkit-clip-path: polygon(50% 0%, 61% 35%, 98% 35%, 68% 57%, 79% 91%, 50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%);
+            clip-path: polygon(50% 0%, 61% 35%, 98% 35%, 68% 57%, 79% 91%, 50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%);
+            box-sizing: border-box;
+        }
+        
+        .review-text {
+            color: #555;
+            line-height: 1.6;
+        }
+        
+        .show-more-container {
+            text-align: center;
+            margin-top: 30px;
+        }
+        
+        .show-more-btn {
+            padding: 14px 40px;
+            background: #2e7d32;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background 0.2s;
+            min-height: 44px;
+            min-width: 140px;
+        }
+        
+        .show-more-btn:hover {
+            background: #1b5e20;
+        }
+        
+        .hidden-review {
+            display: none;
+        }
+        
+        /* Footer */
+        .footer-main {
+            background: #333;
+            color: white;
+            padding: 40px 0;
+        }
+        
+        .policy-links {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            flex-wrap: wrap;
+            list-style: none;
+        }
+        
+        .policy-links a {
+            color: white;
+            text-decoration: none;
+            font-size: 14px;
+            transition: color 0.2s;
+        }
+        
+        .policy-links a:hover {
+            color: #4caf50;
+        }
+        
+        /* Responsive adjustments - ORGANIZED AND FIXED */
+        @media (max-width: 768px) {
+            .product-main {
+                grid-template-columns: 1fr;
+                gap: 30px;
+                padding: 30px 0;
+            }
+            
+            .header-content {
+                flex-direction: column;
+                gap: 20px;
+            }
+            
+            .header-links {
+                gap: 25px;
+            }
+            
+            .main-image-container {
+                height: 400px;
+                width: 100%;
+            }
+            
+            .product-title {
+                font-size: 28px;
+                margin-bottom: 25px;
+            }
+            
+            .current-price {
+                font-size: 32px;
+            }
+            
+            .size-options {
+                flex-direction: column;
+                gap: 12px;
+            }
+            
+            .size-option {
+                min-width: auto;
+                width: 100%;
+                padding: 14px;
+                min-height: 48px;
+            }
+            
+            .buy-button {
+                padding: 16px;
+                font-size: 17px;
+                min-height: 48px;
+            }
+            
+            .payment-icons {
+                gap: 25px;
+            }
+            
+            .payment-icon {
+                height: 28px;
+            }
+            
+            .policy-links {
+                gap: 20px;
+            }
+            
+            .section-title {
+                margin-bottom: 25px;
+                font-size: 22px;
+            }
+            
+            .review {
+                padding: 30px 0;
+            }
+            
+            .image-with-caption {
+                margin-bottom: 35px;
+            }
+            
+            .desc-image-box {
+                height: 220px;
+                width: 100%;
+            }
+            
+            /* Mobile scaling for new star styles */
+            .review .review-stars .star {
+                --size: 22px;
+            }
+            
+            .thumbnail {
+                width: 70px;
+                height: 70px;
+            }
+            
+            .details-table th,
+            .details-table td {
+                padding: 12px 15px;
+                display: block;
+                width: 100%;
+            }
+            
+            .details-table th {
+                background: #f0f0f0;
+                border-bottom: none;
+                padding-bottom: 5px;
+            }
+            
+            .details-table td {
+                padding-top: 5px;
+                padding-bottom: 15px;
+                border-bottom: 1px solid #eaeaea;
+            }
+            
+            .details-table tr {
+                display: block;
+                margin-bottom: 15px;
+                border-bottom: 2px solid #ddd;
+            }
+            
+            .details-table tr:last-child {
+                border-bottom: none;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .product-main {
+                padding: 20px 0;
+                gap: 25px;
+            }
+            
+            .main-image-container {
+                height: 320px;
+            }
+            
+            .thumbnail {
+                width: 60px;
+                height: 60px;
+                min-height: 44px;
+                min-width: 44px;
+            }
+            
+            .header-links {
+                flex-direction: column;
+                align-items: center;
+                gap: 15px;
+            }
+            
+            .policy-links {
+                flex-direction: column;
+                align-items: center;
+                gap: 20px;
+            }
+            
+            .rating-block {
+                gap: 8px;
+                flex-direction: column;
+                align-items: flex-start;
+            }
+            
+            .product-title {
+                font-size: 26px;
+                margin-bottom: 20px;
+            }
+            
+            .current-price {
+                font-size: 28px;
+            }
+            
+            .original-price {
+                font-size: 18px;
+            }
+            
+            .buy-button {
+                padding: 15px;
+                font-size: 16px;
+                min-height: 50px;
+            }
+            
+            .payment-icons {
+                gap: 20px;
+                flex-wrap: wrap;
+            }
+            
+            .payment-icon {
+                height: 24px;
+            }
+            
+            .desc-image-box {
+                height: 200px;
+            }
+            
+            .image-caption {
+                font-size: 13px;
+                line-height: 1.5;
+                padding: 0 5px;
+            }
+            
+            .review-header {
+                gap: 8px;
+                flex-direction: column;
+                align-items: flex-start;
+            }
+            
+            .reviewer-name {
+                font-size: 15px;
+            }
+            
+            .review-date {
+                font-size: 13px;
+            }
+            
+            .review .review-stars .star {
+                --size: 20px;
+            }
+            
+            .container {
+                padding: 0 15px;
+            }
+            
+            .physical-specs {
+                padding: 15px;
+            }
+            
+            .specs-grid {
+                grid-template-columns: 1fr;
+                gap: 10px;
+            }
+            
+            .spec-item {
+                padding: 12px;
+            }
+        }
+        
+        /* Touch swipe improvements */
+        .gallery-section {
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+        }
+        
+        .thumbnail-gallery::-webkit-scrollbar {
+            height: 4px;
+        }
+        
+        .thumbnail-gallery::-webkit-scrollbar-track {
+            background: #f1f1f1;
+            border-radius: 2px;
+        }
+        
+        .thumbnail-gallery::-webkit-scrollbar-thumb {
+            background: #c1c1c1;
+            border-radius: 2px;
+        }
+        
+        /* Utility */
+        .visually-hidden {
+            position: absolute;
+            width: 1px;
+            height: 1px;
+            padding: 0;
+            margin: -1px;
+            overflow: hidden;
+            clip: rect(0, 0, 0, 0);
+            white-space: nowrap;
+            border: 0;
+        }
+        
+        .sr-only {
+            position: absolute;
+            width: 1px;
+            height: 1px;
+            padding: 0;
+            margin: -1px;
+            overflow: hidden;
+            clip: rect(0, 0, 0, 0);
+            white-space: nowrap;
+            border: 0;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="site-header">
+        <div class="container">
+            <div class="header-content">
+                <div class="logo">EasyBuyOnline</div>
+                <div class="header-links">
+                    <a href="index.html" class="header-link">Home</a>
+                    <a href="shop.html" class="header-link">Shop</a>
+                    <a href="contact.html" class="header-link">Contact</a>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="container">
+        <div class="product-main">
+            <!-- Left Column: Gallery -->
+            <section class="gallery-section">
+                <div class="main-image-container" id="main-image-container">
+                    <img id="main-image" src="https://i.ibb.co/5xcNhC23/f2460ab9-ca14-448d-a2c5-9d2a38d9cef8.jpg" 
+                         alt="GrillMaster Pro Cast Iron Grill Pan - Steak Grilling" class="main-image">
+                </div>
+                
+                <div class="thumbnail-gallery">
+                    <div class="thumbnail active" data-index="0">
+                        <img src="https://i.ibb.co/5xcNhC23/f2460ab9-ca14-448d-a2c5-9d2a38d9cef8.jpg" 
+                             alt="GrillMaster Pro - Steak grilling in pan">
+                    </div>
+                    <div class="thumbnail" data-index="1">
+                        <img src="https://i.ibb.co/DDHxTHqd/8526e3cf-1b9e-42aa-a7e1-214447cbb348.jpg" 
+                             alt="GrillMaster Pro - Black square grill pan">
+                    </div>
+                    <div class="thumbnail" data-index="2">
+                        <img src="https://i.ibb.co/1fWYfgg7/fbc3807e-e0b9-4800-9d92-5d37a92317e5.jpg" 
+                             alt="GrillMaster Pro - Three colored grill pans">
+                    </div>
+                    <div class="thumbnail" data-index="3">
+                        <img src="https://i.ibb.co/RTkrgq77/a4d4827d-4f55-414c-b903-8c4454ff6dc2.jpg" 
+                             alt="GrillMaster Pro - Close-up of ridges">
+                    </div>
+                    <div class="thumbnail" data-index="4">
+                        <img src="https://i.ibb.co/M5ffmTKn/7a9d6332-151f-41ca-8215-41dac5dcc16d.jpg" 
+                             alt="GrillMaster Pro - Size comparison table">
+                    </div>
+                </div>
+            </section>
+
+            <!-- Right Column: Product Info -->
+            <section class="product-info-section">
+                <!-- Rating Block -->
+                <div class="rating-block">
+                    <div class="star-rating" aria-label="Rating: 4.5 out of 5 stars">
+                        <div class="filled-stars">★★★★★</div>
+                        <div class="empty-stars">★★★★★</div>
+                    </div>
+                    <span class="rating-value">4.5</span>
+                    <span>(94 reviews)</span>
+                </div>
+
+                <!-- Product Header -->
+                <h1 class="product-title">GrillMaster Pro Cast Iron Grill Pan</h1>
+                
+                <!-- Price Information -->
+                <div class="price-section">
+                    <div class="current-price" id="current-price">$34.99</div>
+                    <div>
+                        <span class="original-price" id="original-price">$42.99</span>
+                        <span class="discount-badge" id="discount-badge">19% OFF</span>
+                    </div>
+                </div>
+
+                <!-- Size Selector -->
+                <div class="size-selector">
+                    <span class="size-label">Select Size:</span>
+                    <div class="size-options">
+                        <div class="size-option selected" id="size-large" data-price="34.99" data-original="42.99">Large</div>
+                        <div class="size-option" id="size-small" data-price="24.99" data-original="32.99">Small</div>
+                    </div>
+                </div>
+
+                <!-- Purchase Area -->
+                <div class="purchase-area">
+                    <button class="buy-button" onclick="redirectToCheckout()">
+                        Buy Now
+                    </button>
+                    
+                    <div class="payment-icons">
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/5/5e/Visa_Inc._logo.svg" alt="Visa" class="payment-icon">
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/2/2a/Mastercard-logo.svg" alt="Mastercard" class="payment-icon">
+                    </div>
+                </div>
+
+                <!-- Physical Specs (Compact Display) -->
+                <div class="physical-specs">
+                    <div class="specs-title">Physical Specifications</div>
+                    <div class="specs-grid">
+                        <div class="spec-item">
+                            <strong>Large:</strong> 40×30×5 cm • 2.4 kg • Colors: Blue, Red, Black
+                        </div>
+                        <div class="spec-item">
+                            <strong>Small:</strong> 30×22×5 cm • 1.3 kg • Colors: Blue, Red, Black
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+
+        <!-- Description Section -->
+        <section class="description-section">
+            <h2 class="section-title">Product Description</h2>
+            
+            <div class="product-description">
+                <p>Elevate your indoor grilling with the GrillMaster Pro Cast Iron Grill Pan, crafted for durability and performance. Its ridged surface delivers authentic grill marks while draining excess fat, and the dual handles ensure safe, easy use. Perfect for meats, vegetables, and sandwiches.</p>
+                
+                <p>The cast iron construction provides superior heat retention and even distribution, allowing for perfect searing every time. With its versatile design and professional-grade performance, this grill pan brings the authentic grilling experience right to your kitchen stovetop.</p>
+            </div>
+
+            <!-- Images with Captions (image → caption pattern) -->
+            <div class="description-images">
+                <!-- Image 1 with caption -->
+                <div class="image-with-caption">
+                    <div class="desc-image-box">
+                        <img src="https://i.ibb.co/5xcNhC23/f2460ab9-ca14-448d-a2c5-9d2a38d9cef8.jpg" 
+                             alt="Steak grilling in GrillMaster Pro pan">
+                    </div>
+                    <div class="image-caption">A thick steak grilling in the cast iron pan, showing bold grill marks from high-heat searing</div>
+                </div>
+                
+                <!-- Image 2 with caption -->
+                <div class="image-with-caption">
+                    <div class="desc-image-box">
+                        <img src="https://i.ibb.co/DDHxTHqd/8526e3cf-1b9e-42aa-a7e1-214447cbb348.jpg" 
+                             alt="Black square cast iron grill pan">
+                    </div>
+                    <div class="image-caption">Black square cast iron grill pan with ridged surface and dual handles for safe handling</div>
+                </div>
+                
+                <!-- Image 3 with caption -->
+                <div class="image-with-caption">
+                    <div class="desc-image-box">
+                        <img src="https://i.ibb.co/1fWYfgg7/fbc3807e-e0b9-4800-9d92-5d37a92317e5.jpg" 
+                             alt="Three colored grill pans">
+                    </div>
+                    <div class="image-caption">Available in three stylish colors: black, red, and blue to match any kitchen decor</div>
+                </div>
+                
+                <!-- Image 4 with caption -->
+                <div class="image-with-caption">
+                    <div class="desc-image-box">
+                        <img src="https://i.ibb.co/RTkrgq77/a4d4827d-4f55-414c-b903-8c4454ff6dc2.jpg" 
+                             alt="Close-up of grill pan ridges">
+                    </div>
+                    <div class="image-caption">Close-up of the parallel ridges that create authentic grill marks and drain excess fat</div>
+                </div>
+            </div>
+
+            <!-- Product Details Table -->
+            <div class="product-details">
+                <h3 class="section-title">Technical Specifications</h3>
+                <table class="details-table">
+                    <tr>
+                        <th>Size Options</th>
+                        <td>Small (30×22×5 cm); Large (40×30×5 cm)</td>
+                    </tr>
+                    <tr>
+                        <th>Weight</th>
+                        <td>Small: 1.3 kg; Large: 2.4 kg</td>
+                    </tr>
+                    <tr>
+                        <th>Material</th>
+                        <td>Premium Cast Iron</td>
+                    </tr>
+                    <tr>
+                        <th>Surface Type</th>
+                        <td>Ridged grill surface for authentic marks</td>
+                    </tr>
+                    <tr>
+                        <th>Handle Design</th>
+                        <td>Dual ergonomic handles for safe handling</td>
+                    </tr>
+                    <tr>
+                        <th>Heat Compatibility</th>
+                        <td>Gas; Electric; Ceramic; Induction; Oven-safe</td>
+                    </tr>
+                    <tr>
+                        <th>Colors Available</th>
+                        <td>Black, Red, Blue</td>
+                    </tr>
+                    <tr>
+                        <th>Drainage</th>
+                        <td>Ridged design drains excess fat away from food</td>
+                    </tr>
+                </table>
+            </div>
+        </section>
+
+        <!-- Reviews Section - UPDATED STAR MARKUP -->
+        <section class="reviews-section">
+            <h2 class="section-title">Customer Reviews</h2>
+            
+            <!-- Review 1 - 5 stars -->
+            <div class="review" data-rating="5.0">
+                <div class="review-header">
+                    <div class="reviewer-name">Michael Rodriguez</div>
+                    <div class="review-date">April 12, 2023</div>
+                </div>
+                <div class="review-stars" role="img" aria-label="5 out of 5 stars">
+                    <span class="star" data-star-index="1"></span>
+                    <span class="star" data-star-index="2"></span>
+                    <span class="star" data-star-index="3"></span>
+                    <span class="star" data-star-index="4"></span>
+                    <span class="star" data-star-index="5"></span>
+                </div>
+                <div class="review-text">Best grill pan I've ever owned! The cast iron heats perfectly and gives restaurant-quality grill marks. Highly recommended!</div>
+            </div>
+            
+            <!-- Review 2 - 4 stars -->
+            <div class="review" data-rating="4.0">
+                <div class="review-header">
+                    <div class="reviewer-name">Sarah Johnson</div>
+                    <div class="review-date">April 8, 2023</div>
+                </div>
+                <div class="review-stars" role="img" aria-label="4 out of 5 stars">
+                    <span class="star" data-star-index="1"></span>
+                    <span class="star" data-star-index="2"></span>
+                    <span class="star" data-star-index="3"></span>
+                    <span class="star" data-star-index="4"></span>
+                    <span class="star" data-star-index="5"></span>
+                </div>
+                <div class="review-text">Great pan for indoor grilling. The ridges work perfectly. Only downside is it's a bit heavy, but that's expected with cast iron.</div>
+            </div>
+            
+            <!-- Review 3 - 5 stars -->
+            <div class="review" data-rating="5.0">
+                <div class="review-header">
+                    <div class="reviewer-name">James Wilson</div>
+                    <div class="review-date">April 5, 2023</div>
+                </div>
+                <div class="review-stars" role="img" aria-label="5 out of 5 stars">
+                    <span class="star" data-star-index="1"></span>
+                    <span class="star" data-star-index="2"></span>
+                    <span class="star" data-star-index="3"></span>
+                    <span class="star" data-star-index="4"></span>
+                    <span class="star" data-star-index="5"></span>
+                </div>
+                <div class="review-text">Perfect for apartment living where I can't have an outdoor grill. Steaks come out with perfect grill marks every time!</div>
+            </div>
+            
+            <!-- Review 4 - 4 stars -->
+            <div class="review" data-rating="4.0">
+                <div class="review-header">
+                    <div class="reviewer-name">Emily Chen</div>
+                    <div class="review-date">March 30, 2023</div>
+                </div>
+                <div class="review-stars" role="img" aria-label="4 out of 5 stars">
+                    <span class="star" data-star-index="1"></span>
+                    <span class="star" data-star-index="2"></span>
+                    <span class="star" data-star-index="3"></span>
+                    <span class="star" data-star-index="4"></span>
+                    <span class="star" data-star-index="5"></span>
+                </div>
+                <div class="review-text">Love the dual handles - makes it so much easier to move when hot. The red color looks beautiful in my kitchen.</div>
+            </div>
+            
+            <!-- Review 5 - 5 stars -->
+            <div class="review" data-rating="5.0">
+                <div class="review-header">
+                    <div class="reviewer-name">David Thompson</div>
+                    <div class="review-date">March 25, 2023</div>
+                </div>
+                <div class="review-stars" role="img" aria-label="5 out of 5 stars">
+                    <span class="star" data-star-index="1"></span>
+                    <span class="star" data-star-index="2"></span>
+                    <span class="star" data-star-index="3"></span>
+                    <span class="star" data-star-index="4"></span>
+                    <span class="star" data-star-index="5"></span>
+                </div>
+                <div class="review-text">Professional-grade quality at an affordable price. I use it almost daily for chicken, vegetables, and even grilled sandwiches.</div>
+            </div>
+            
+            <!-- HIDDEN REVIEWS START HERE -->
+            
+            <!-- Hidden Review 6 - 5 stars -->
+            <div class="review hidden-review" id="review-6" data-rating="5.0">
+                <div class="review-header">
+                    <div class="reviewer-name">Lisa Anderson</div>
+                    <div class="review-date">March 20, 2023</div>
+                </div>
+                <div class="review-stars" role="img" aria-label="5 out of 5 stars">
+                    <span class="star" data-star-index="1"></span>
+                    <span class="star" data-star-index="2"></span>
+                    <span class="star" data-star-index="3"></span>
+                    <span class="star" data-star-index="4"></span>
+                    <span class="star" data-star-index="5"></span>
+                </div>
+                <div class="review-text">The fat drainage is fantastic - much healthier cooking. Food doesn't sit in grease. Best kitchen purchase this year!</div>
+            </div>
+            
+            <!-- Hidden Review 7 - 4 stars -->
+            <div class="review hidden-review" id="review-7" data-rating="4.0">
+                <div class="review-header">
+                    <div class="reviewer-name">Robert Kim</div>
+                    <div class="review-date">March 18, 2023</div>
+                </div>
+                <div class="review-stars" role="img" aria-label="4 out of 5 stars">
+                    <span class="star" data-star-index="1"></span>
+                    <span class="star" data-star-index="2"></span>
+                    <span class="star" data-star-index="3"></span>
+                    <span class="star" data-star-index="4"></span>
+                    <span class="star" data-star-index="5"></span>
+                </div>
+                <div class="review-text">Works great on my induction cooktop. Heats evenly and retains heat well. Takes a bit longer to heat up but worth it.</div>
+            </div>
+            
+            <!-- Hidden Review 8 - 4 stars -->
+            <div class="review hidden-review" id="review-8" data-rating="4.0">
+                <div class="review-header">
+                    <div class="reviewer-name">Amanda Lee</div>
+                    <div class="review-date">March 15, 2023</div>
+                </div>
+                <div class="review-stars" role="img" aria-label="4 out of 5 stars">
+                    <span class="star" data-star-index="1"></span>
+                    <span class="star" data-star-index="2"></span>
+                    <span class="star" data-star-index="3"></span>
+                    <span class="star" data-star-index="4"></span>
+                    <span class="star" data-star-index="5"></span>
+                </div>
+                <div class="review-text">Bought the small size for my compact kitchen. Perfect for 2 people. The blue color is beautiful and easy to clean.</div>
+            </div>
+            
+            <!-- Hidden Review 9 - 5 stars -->
+            <div class="review hidden-review" id="review-9" data-rating="5.0">
+                <div class="review-header">
+                    <div class="reviewer-name">Thomas Baker</div>
+                    <div class="review-date">March 10, 2023</div>
+                </div>
+                <div class="review-stars" role="img" aria-label="5 out of 5 stars">
+                    <span class="star" data-star-index="1"></span>
+                    <span class="star" data-star-index="2"></span>
+                    <span class="star" data-star-index="3"></span>
+                    <span class="star" data-star-index="4"></span>
+                    <span class="star" data-star-index="5"></span>
+                </div>
+                <div class="review-text">As a professional chef, I appreciate the quality construction. This pan performs as well as commercial-grade equipment.</div>
+            </div>
+            
+            <!-- Show More Button -->
+            <div class="show-more-container">
+                <button class="show-more-btn" id="show-more-btn">Show more</button>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-main">
+            <div class="container">
+                <ul class="policy-links">
+                    <li><a href="privacy-policy.html">Privacy Policy</a></li>
+                    <li><a href="Shipping-policy.html">Shipping Policy</a></li>
+                    <li><a href="refund-return-policy.html">Refund & Return Policy</a></li>
+                    <li><a href="Terms-Conditions.html">Terms & Conditions</a></li>
+<li><a 
+href="about.html">About</a></li>
+                </ul>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Gallery functionality
+        document.addEventListener('DOMContentLoaded', function() {
+            const mainImage = document.getElementById('main-image');
+            const thumbnails = document.querySelectorAll('.thumbnail');
+            const sizeOptions = document.querySelectorAll('.size-option');
+            const showMoreBtn = document.getElementById('show-more-btn');
+            const hiddenReviews = document.querySelectorAll('.hidden-review');
+            const mainImageContainer = document.getElementById('main-image-container');
+            
+            // Image gallery interaction
+            thumbnails.forEach(thumbnail => {
+                thumbnail.addEventListener('click', function() {
+                    // Remove active class from all thumbnails
+                    thumbnails.forEach(t => t.classList.remove('active'));
+                    
+                    // Add active class to clicked thumbnail
+                    this.classList.add('active');
+                    
+                    // Update main image
+                    const imgSrc = this.querySelector('img').src;
+                    mainImage.src = imgSrc;
+                    currentImageIndex = parseInt(this.getAttribute('data-index'));
+                    
+                    // Scroll thumbnail into view on mobile
+                    if (window.innerWidth <= 768) {
+                        this.scrollIntoView({
+                            behavior: 'smooth',
+                            inline: 'center',
+                            block: 'nearest'
+                        });
+                    }
+                });
+            });
+            
+            // Fixed: Improved touch swipe for mobile gallery
+            let touchStartX = 0;
+            let touchEndX = 0;
+            let currentImageIndex = 0;
+            let isSwiping = false;
+            const swipeThreshold = 50;
+            
+            mainImageContainer.addEventListener('touchstart', function(e) {
+                touchStartX = e.touches[0].clientX;
+                isSwiping = true;
+            }, { passive: true });
+            
+            mainImageContainer.addEventListener('touchmove', function(e) {
+                if (!isSwiping) return;
+                touchEndX = e.touches[0].clientX;
+            }, { passive: true });
+            
+            mainImageContainer.addEventListener('touchend', function(e) {
+                if (!isSwiping) return;
+                isSwiping = false;
+                
+                // Fixed: Use clientX consistently for accurate distance calculation
+                const touchEndX = e.changedTouches[0].clientX;
+                const distance = touchStartX - touchEndX;
+                
+                if (Math.abs(distance) > swipeThreshold) {
+                    if (distance > 0) {
+                        // Swipe left - next image
+                        currentImageIndex = (currentImageIndex + 1) % thumbnails.length;
+                    } else {
+                        // Swipe right - previous image
+                        currentImageIndex = (currentImageIndex - 1 + thumbnails.length) % thumbnails.length;
+                    }
+                    
+                    // Update gallery
+                    thumbnails.forEach(t => t.classList.remove('active'));
+                    if (thumbnails[currentImageIndex]) {
+                        thumbnails[currentImageIndex].classList.add('active');
+                        const imgSrc = thumbnails[currentImageIndex].querySelector('img').src;
+                        mainImage.src = imgSrc;
+                        
+                        // Scroll thumbnail into view on mobile
+                        if (window.innerWidth <= 768) {
+                            thumbnails[currentImageIndex].scrollIntoView({
+                                behavior: 'smooth',
+                                inline: 'center',
+                                block: 'nearest'
+                            });
+                        }
+                    }
+                }
+            });
+            
+            // Size selector functionality
+            sizeOptions.forEach(option => {
+                option.addEventListener('click', function() {
+                    // Remove selected class from all options
+                    sizeOptions.forEach(opt => opt.classList.remove('selected'));
+                    
+                    // Add selected class to clicked option
+                    this.classList.add('selected');
+                    
+                    // Update price display
+                    const price = this.getAttribute('data-price');
+                    const originalPrice = this.getAttribute('data-original');
+                    const discount = Math.round((1 - (price / originalPrice)) * 100);
+                    
+                    document.getElementById('current-price').textContent = '$' + price;
+                    document.getElementById('original-price').textContent = '$' + originalPrice;
+                    document.getElementById('discount-badge').textContent = discount + '% OFF';
+                });
+            });
+            
+            // Show more reviews functionality
+            let reviewsVisible = false;
+            showMoreBtn.addEventListener('click', function() {
+                if (!reviewsVisible) {
+                    // Show hidden reviews
+                    hiddenReviews.forEach(review => {
+                        review.style.display = 'block';
+                    });
+                    this.textContent = 'Show less';
+                    reviewsVisible = true;
+                } else {
+                    // Hide reviews
+                    hiddenReviews.forEach(review => {
+                        review.style.display = 'none';
+                    });
+                    this.textContent = 'Show more';
+                    reviewsVisible = false;
+                }
+            });
+            
+            // Header and footer link handling (for placeholder pages)
+            const allLinks = document.querySelectorAll('.header-link, .policy-links a');
+            allLinks.forEach(link => {
+                link.addEventListener('click', function(e) {
+                    const href = this.getAttribute('href');
+                    // For demonstration, alert for placeholder pages
+                    if (href && !href.includes('index.html') && href.includes('.html')) {
+                        // This would normally navigate to the page
+                        // For demo purposes, we'll just allow normal navigation
+                        // The page will show 404 if not implemented, as requested
+                    }
+                });
+            });
+            
+            // Initialize first image as active
+            if (thumbnails.length > 0) {
+                thumbnails[0].click();
+            }
+            
+            // Initialize large size as selected
+            if (sizeOptions.length > 0) {
+                document.getElementById('size-large').click();
+            }
+            
+            // FIXED: Star coloring script - Properly color the stars based on rating
+            const reviews = document.querySelectorAll('.review[data-rating]');
+            reviews.forEach(review => {
+                const rating = parseFloat(review.getAttribute('data-rating'));
+                const stars = review.querySelectorAll('.review-stars .star');
+                
+                stars.forEach((star, index) => {
+                    const starIndex = index + 1;
+                    let fillPercentage = 0;
+                    
+                    if (rating >= starIndex) {
+                        // Full star
+                        fillPercentage = 100;
+                    } else if (rating > starIndex - 1) {
+                        // Partial star
+                        fillPercentage = (rating - (starIndex - 1)) * 100;
+                    }
+                    
+                    // Apply the fill percentage
+                    star.style.setProperty('--fill', fillPercentage + '%');
+                });
+                
+                // Update aria-label for accessibility
+                const starsContainer = review.querySelector('.review-stars');
+                if (starsContainer) {
+                    starsContainer.setAttribute('aria-label', rating + ' out of 5 stars');
+                }
+            });
+        });
+        
+        // ===== دالة التوجيه إلى صفحة الدفع =====
+        function redirectToCheckout() {
+            // 1. التأكد من اختيار حجم
+            const selectedSize = document.querySelector('.size-option.selected');
+            
+            if (!selectedSize) {
+                alert("Please select a size before proceeding to checkout");
+                return;
+            }
+            
+            // 2. جمع البيانات
+            const price = selectedSize.getAttribute('data-price');
+            const size = selectedSize.textContent.trim();
+            const productName = document.querySelector('.product-title').textContent.trim();
+            
+            // 3. إنشاء رابط الدفع مع البيانات
+            const checkoutURL = `checkout.html?price=${price}&size=${encodeURIComponent(size)}&product=${encodeURIComponent(productName)}`;
+            
+            // 4. التوجيه
+            window.location.href = checkoutURL;
+        }
+    </script>
+</body>
+</html>
