@@ -1,0 +1,436 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Refund & Return Policy - EasyBuyOnline</title>
+    <style>
+        :root {
+            --primary-color: #2c3e50;
+            --secondary-color: #7f8c8d;
+            --accent-color: #16a085;
+            --light-color: #ecf0f1;
+            --spacing-unit: 1.5rem;
+            --max-width: 800px;
+            --border-radius: 4px;
+        }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            margin: 0;
+            padding: 0;
+            background-color: #f9f9f9;
+        }
+        .container {
+            max-width: var(--max-width);
+            margin: 0 auto;
+            padding: var(--spacing-unit);
+            background-color: white;
+            box-shadow: 0 0 10px rgba(0,0,0,0.05);
+        }
+        header {
+            border-bottom: 2px solid var(--light-color);
+            padding-bottom: var(--spacing-unit);
+            margin-bottom: var(--spacing-unit);
+        }
+        h1 {
+            color: var(--primary-color);
+            margin-bottom: 0.5rem;
+        }
+        .subtitle {
+            color: var(--secondary-color);
+            font-size: 1.1rem;
+        }
+        section {
+            margin-bottom: 2.5rem;
+            padding-bottom: 1.5rem;
+            border-bottom: 1px solid #eee;
+        }
+        h2 {
+            color: var(--primary-color);
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            margin-top: 0;
+        }
+        .icon {
+            width: 24px;
+            height: 24px;
+            stroke: var(--accent-color);
+            fill: none;
+            stroke-width: 2;
+            stroke-linecap: round;
+            stroke-linejoin: round;
+        }
+        p, li {
+            color: #555;
+        }
+        ul {
+            padding-left: 1.5rem;
+        }
+        footer {
+            background-color: var(--primary-color);
+            color: white;
+            padding: 2rem var(--spacing-unit);
+            margin-top: 3rem;
+            text-align: center;
+        }
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+        .footer-links a {
+            color: var(--light-color);
+            text-decoration: none;
+        }
+        .footer-links a:hover {
+            text-decoration: underline;
+            color: white;
+        }
+        .legal-line {
+            font-size: 0.9rem;
+            color: #bdc3c7;
+            margin-top: 1rem;
+            border-top: 1px solid #34495e;
+            padding-top: 1rem;
+        }
+        
+        /* زر الرجوع */
+        .back-button {
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            background-color: #e74c3c;
+            color: white;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+            box-shadow: 0 4px 12px rgba(231, 76, 60, 0.4);
+            z-index: 1000;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+        }
+        .back-button:hover {
+            background-color: #c0392b;
+            transform: scale(1.1);
+            box-shadow: 0 6px 16px rgba(231, 76, 60, 0.6);
+        }
+        .back-button:active {
+            transform: scale(0.95);
+        }
+        .back-button svg {
+            width: 30px;
+            height: 30px;
+            filter: drop-shadow(0 2px 2px rgba(0,0,0,0.2));
+        }
+        .back-button svg path {
+            stroke: white;
+            stroke-width: 3;
+            stroke-linecap: round;
+            stroke-linejoin: round;
+            fill: none;
+        }
+        
+        /* أنماط جديدة */
+        .note-box {
+            background-color: #f8f9fa;
+            border-left: 4px solid var(--accent-color);
+            padding: 15px;
+            margin: 1.5rem 0;
+            font-size: 0.9rem;
+            border-radius: var(--border-radius);
+        }
+        .note-box strong {
+            color: var(--primary-color);
+        }
+        .policy-link {
+            color: var(--accent-color);
+            font-weight: 600;
+            text-decoration: none;
+        }
+        .policy-link:hover {
+            text-decoration: underline;
+        }
+        
+        /* تصميم الجدول */
+        .refund-summary {
+            background: linear-gradient(135deg, #f8f9fa, #e9ecef);
+            border-radius: 10px;
+            padding: 20px;
+            margin: 1.5rem 0;
+            border: 1px solid #dee2e6;
+        }
+        .refund-category {
+            margin-bottom: 25px;
+        }
+        .refund-category:last-child {
+            margin-bottom: 0;
+        }
+        .category-title {
+            font-weight: 700;
+            color: var(--primary-color);
+            margin-bottom: 12px;
+            font-size: 1.1rem;
+            padding-bottom: 8px;
+            border-bottom: 2px solid var(--accent-color);
+        }
+        .scenario-item {
+            background-color: white;
+            border-radius: 8px;
+            padding: 15px;
+            margin-bottom: 12px;
+            border-left: 4px solid #ddd;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+        }
+        .scenario-item.store-error {
+            border-left-color: #27ae60;
+        }
+        .scenario-item.customer-error {
+            border-left-color: #e74c3c;
+        }
+        .scenario-title {
+            font-weight: 600;
+            margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .scenario-desc {
+            font-size: 0.95rem;
+            color: #666;
+            margin-bottom: 10px;
+        }
+        .refund-amount {
+            font-family: 'Courier New', Consolas, monospace;
+            font-weight: 700;
+            font-size: 1.2rem;
+            color: var(--primary-color);
+            background-color: #f8f9fa;
+            padding: 8px 12px;
+            border-radius: 5px;
+            display: inline-block;
+        }
+        .refund-amount.full {
+            color: #27ae60;
+            background-color: #eafaf1;
+        }
+        .refund-amount.partial {
+            color: #f39c12;
+            background-color: #fef9e7;
+        }
+        .refund-amount.none {
+            color: #e74c3c;
+            background-color: #fdedec;
+        }
+        
+        /* البريد الإلكتروني */
+        .email-link {
+            color: #e74c3c;
+            font-weight: 700;
+            text-decoration: none;
+            border-bottom: 2px solid transparent;
+            transition: all 0.3s ease;
+            padding: 2px 0;
+        }
+        .email-link:hover {
+            border-bottom-color: #e74c3c;
+            text-decoration: none;
+        }
+        .email-note {
+            font-size: 0.9rem;
+            color: #666;
+            margin-top: 5px;
+        }
+        
+        /* تحسينات أخرى */
+        .calculation-note {
+            background-color: #e8f4f8;
+            border: 1px solid #b1d4e0;
+            border-radius: 8px;
+            padding: 15px;
+            margin: 1.5rem 0;
+            font-size: 0.95rem;
+        }
+        .calculation-note strong {
+            color: #2c5e73;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Refund & Return Policy</h1>
+            <p class="subtitle">EasyBuyOnline</p>
+        </header>
+
+        <section>
+            <h2>
+                <svg class="icon" viewBox="0 0 24 24">
+                    <path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/>
+                </svg>
+                Return Eligibility
+            </h2>
+            <p>A product purchased from EasyBuyOnline may be eligible for return under the following conditions:</p>
+            <ul>
+                <li>The product received does not match the image or description presented on the product page.</li>
+                <li>The product is broken, defective, or unusable upon arrival.</li>
+                <li>The product is in its original condition and packaging as specified in the Product Condition Requirements section.</li>
+            </ul>
+            <p>Returns are accepted for products that are not as described, even if they are not technically defective. A product that matches its listing description and functions correctly is not eligible for return.</p>
+        </section>
+
+        <section>
+            <h2>
+                <svg class="icon" viewBox="0 0 24 24">
+                    <path d="M11.99 2C6.47 2 2 6.48 2 12s4.47 10 9.99 10C17.52 22 22 17.52 22 12S17.52 2 11.99 2zM12 20c-4.42 0-8-3.58-8-8s3.58-8 8-8 8 3.58 8 8-3.58 8-8 8zm.5-13H11v6l5.25 3.15.75-1.23-4.5-2.67z"/>
+                </svg>
+                Return Timeframe
+            </h2>
+            <p>The customer must initiate a return request within <strong>14 days</strong> of receiving the product. The request is initiated by sending an email message to the store's official email address. The return request timestamp is based on the time the store receives the customer's email message. Requests received after this 14-day period will not be accepted.</p>
+        </section>
+
+        <section>
+            <h2>
+                <svg class="icon" viewBox="0 0 24 24">
+                    <path d="M20 4H4c-1.11 0-1.99.89-1.99 2L2 18c0 1.11.89 2 2 2h16c1.11 0 2-.89 2-2V6c0-1.11-.89-2-2-2zm0 14H4v-6h16v6zm0-10H4V6h16v2z"/>
+                </svg>
+                Refund Scenarios & Amounts
+            </h2>
+            
+            <div class="calculation-note">
+                <p><strong>All calculations based on:</strong> Product Price: $43 + Shipping: $7 = Total Paid: $50</p>
+            </div>
+            
+            <div class="refund-summary">
+                <div class="refund-category">
+                    <div class="category-title">Store Errors (Defective/Damaged Products)</div>
+                    
+                    <div class="scenario-item store-error">
+                        <div class="scenario-title">Completely Damaged/Unusable Product</div>
+                        <div class="scenario-desc">Product arrives completely damaged or does not function at all.</div>
+                        <div class="refund-amount full">Full Refund: $50</div>
+                        <p><strong>Process:</strong> Customer keeps or disposes of the product. Full refund issued plus formal apology.</p>
+                    </div>
+                    
+                    <div class="scenario-item store-error">
+                        <div class="scenario-title">Partially Defective Product</div>
+                        <div class="scenario-desc">Product has defects but functions partially.</div>
+                        <div class="refund-amount full">Full Refund: $50 + Return Shipping Coverage</div>
+                        <p><strong>Process:</strong> Customer returns the product. Full refund issued plus coverage for return shipping costs.</p>
+                    </div>
+                </div>
+                
+                <div class="refund-category">
+                    <div class="category-title">Customer Errors (Incorrect Shipping Address)</div>
+                    
+                    <div class="scenario-item customer-error">
+                        <div class="scenario-title">Product Returned to Store</div>
+                        <div class="scenario-desc">Wrong person returns the product or shipping carrier discovers the error.</div>
+                        <div class="refund-amount partial">Partial Refund: $43</div>
+                        <p><strong>Calculation:</strong> $50 - $7 (original shipping) = $43</p>
+                    </div>
+                    
+                    <div class="scenario-item customer-error">
+                        <div class="scenario-title">Product Kept by Wrong Person</div>
+                        <div class="scenario-desc">Wrong person receives and keeps the product.</div>
+                        <div class="refund-amount none">No Refund: $0</div>
+                        <p><strong>Result:</strong> Customer loses the full $50 payment.</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="note-box">
+                <p><strong>Address Accuracy:</strong> Customers must provide correct and complete shipping information. Verify all address details before completing purchase.</p>
+            </div>
+        </section>
+
+        <section>
+            <h2>
+                <svg class="icon" viewBox="0 0 24 24">
+                    <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
+                </svg>
+                Product Condition Requirements
+            </h2>
+            <p>To qualify for a refund, the returned product must meet all of the following condition requirements:</p>
+            <ul>
+                <li>The product must be in its original, undamaged packaging.</li>
+                <li>The product must not show damage caused by the customer beyond reasonable inspection and functional testing.</li>
+                <li>Minor opening of packaging to verify product existence, type, and basic functionality is permitted and will not void return eligibility.</li>
+                <li><strong>Exception for completely damaged products:</strong> If the product arrives completely damaged or unusable, the customer should <strong>NOT return it</strong>. Instead, they may keep or dispose of it and will receive a full refund plus a formal apology.</li>
+            </ul>
+        </section>
+
+        <section>
+            <h2>
+                <svg class="icon" viewBox="0 0 24 24">
+                    <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zM9.29 16.29L5.7 12.7a.9959.9959 0 0 1 0-1.41c.39-.39 1.02-.39 1.41 0L10 14.17l6.88-6.88c.39-.39 1.02-.39 1.41 0 .39.39.39 1.02 0 1.41l-7.59 7.59c-.38.39-1.02.39-1.41 0z"/>
+                </svg>
+                Refund Process
+            </h2>
+            <p>The refund process is initiated upon the store's receipt and inspection of the returned product. The process is as follows:</p>
+            <ul>
+                <li>The customer must send an email message to <a href="mailto:support@easybuyonline.online" class="email-link">support@easybuyonline.online</a> to request a return authorization.</li>
+                <li>Upon approval, the customer ships the product back to the address provided by the store.</li>
+                <li>Once the returned product is received and inspected, the store notifies the customer of the inspection results.</li>
+                <li>If the return is approved, a refund for the product price is processed. The refund is issued directly back to the customer's original payment method.</li>
+                <li>The time for the refund credit to appear in the customer's account depends on the processing times of the payment provider.</li>
+                <li><strong>For returns due to defects:</strong> After approval, the customer receives a special payment to cover return shipping costs with the agreed carrier, followed by the full refund.</li>
+            </ul>
+            
+            <div class="note-box">
+                <p><strong>Return Verification Requirement:</strong> Return acceptance requires photographing the product next to its original official packaging. This verification occurs through communication with the store's official support channel. Communication with any external entities is not accepted.</p>
+            </div>
+        </section>
+
+        <section>
+            <h2>
+                <svg class="icon" viewBox="0 0 24 24">
+                    <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z"/>
+                </svg>
+                Exceptions
+            </h2>
+            <p>Certain situations are not eligible for return or refund under this policy:</p>
+            <ul>
+                <li>Products damaged due to customer misuse, improper handling, neglect, or accidents after delivery.</li>
+                <li>Products that have been altered, modified, or repaired by anyone other than authorized personnel.</li>
+                <li>Returns initiated after the 14-day return window has closed.</li>
+                <li>Change of mind or incorrect order placement by the customer.</li>
+            </ul>
+        </section>
+
+        <p><em>Last updated: 2025</em></p>
+        <p><strong>This Refund & Return Policy is provided by EasyBuyOnline.</strong></p>
+    </div>
+
+    <footer>
+        <div class="footer-links">
+            <a href="index.html">Home</a>
+            <a href="privacy-policy.html">Privacy Policy</a>
+            <a href="shipping-policy.html">Shipping Policy</a>
+            <a href="refund-return-policy.html">Refund & Return Policy</a>
+            <a href="terms-conditions.html">Terms & Conditions</a>
+            <a href="about.html">About</a>
+            <a href="contact.html">Contact</a>
+        </div>
+        <div class="legal-line">
+            &copy; 2025 EasyBuyOnline. All rights reserved.
+        </div>
+    </footer>
+
+    <!-- زر الرجوع -->
+    <a href="javascript:history.back()" class="back-button" title="Go Back">
+        <svg viewBox="0 0 32 32">
+            <path d="M20 8 L12 16 L20 24"/>
+        </svg>
+    </a>
+</body>
+</html>
