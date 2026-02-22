@@ -252,7 +252,7 @@
             font-size: 16px;
         }
         
-        /* Price Breakdown - UPDATED: removed tax section */
+        /* Price Breakdown */
         .price-breakdown {
             margin: 30px 0;
         }
@@ -280,7 +280,7 @@
             margin-top: 20px;
         }
         
-        /* Terms & Conditions - MOVED to right column */
+        /* Terms & Conditions */
         .terms-section {
             background: #fff9c4;
             padding: 20px;
@@ -388,7 +388,7 @@
             border: 1px solid #c8e6c9;
         }
         
-        /* Security Badge - MOVED to right column */
+        /* Security Badge */
         .security-badge {
             display: flex;
             align-items: center;
@@ -463,7 +463,82 @@
             font-size: 13px;
         }
         
-        /* ✅ الهاتف فقط - النموذج أولاً ثم الملخص تحته */
+        /* PayPal Modal Styles */
+        #paypal-card-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.5);
+            display: none;
+            align-items: center;
+            justify-content: center;
+            z-index: 2000;
+        }
+        
+        .paypal-modal {
+            background: white;
+            padding: 30px;
+            border-radius: 12px;
+            max-width: 400px;
+            width: 90%;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+        }
+        
+        .paypal-modal h3 {
+            margin-bottom: 20px;
+            color: #2e7d32;
+            font-size: 22px;
+        }
+        
+        .card-field {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid #ddd;
+            border-radius: 8px;
+            background: white;
+            margin-bottom: 15px;
+            min-height: 50px;
+        }
+        
+        .card-field iframe {
+            width: 100%;
+        }
+        
+        .paypal-close {
+            background: #e74c3c;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 8px;
+            cursor: pointer;
+            margin-top: 10px;
+            font-weight: 600;
+        }
+        
+        .paypal-close:hover {
+            background: #c0392b;
+        }
+        
+        .paypal-submit {
+            background: #2e7d32;
+            color: white;
+            border: none;
+            padding: 15px;
+            border-radius: 8px;
+            cursor: pointer;
+            width: 100%;
+            font-size: 18px;
+            font-weight: 700;
+            margin: 15px 0;
+        }
+        
+        .paypal-submit:hover {
+            background: #1b5e20;
+        }
+        
+        /* Responsive */
         @media (max-width: 768px) {
             .checkout-container {
                 grid-template-columns: 1fr;
@@ -518,7 +593,6 @@
                 gap: 20px;
             }
             
-            /* زر الرجوع على الهاتف */
             .back-button {
                 width: 50px;
                 height: 50px;
@@ -566,20 +640,9 @@
                 height: 18px;
             }
         }
-        
-        /* Utility Classes */
-        .hidden {
-            display: none !important;
-        }
-        
-        .text-center {
-            text-align: center;
-        }
-        
-        .mb-20 {
-            margin-bottom: 20px;
-        }
     </style>
+    <!-- PayPal SDK with Hosted Fields - باستخدام Client ID الخاص بالـ Sandbox -->
+    <script src="https://www.paypal.com/sdk/js?components=card-fields&client-id=AZPJ5ocWFTkYatGx7Ay5JC7ctXMtbLXJ-ab8Jjpfy3J0vVY6zzCPfdSq1IX0c2Tvx17ZU5n82XnSaNJo"></script>
 </head>
 <body>
     <!-- زر الرجوع الأحمر -->
@@ -643,7 +706,7 @@
                             <div class="error-message" id="cityError"></div>
                         </div>
                         
-                        <!-- State Field in Form (kept as required shipping information) -->
+                        <!-- State Field -->
                         <div class="form-group">
                             <label for="formState" class="form-label">State <span class="required">*</span></label>
                             <select id="formState" name="formState" class="form-input" required>
@@ -719,7 +782,7 @@
                         </div>
                     </div>
                     
-                    <!-- Hidden Fields for Formspree -->
+                    <!-- Hidden Fields -->
                     <input type="hidden" id="basePrice" name="basePrice" value="34.99">
                     <input type="hidden" id="salesTax" name="salesTax" value="0.00">
                     <input type="hidden" id="totalPrice" name="totalPrice" value="34.99">
@@ -730,7 +793,7 @@
                 </form>
             </div>
             
-            <!-- Right Column: Order Summary - UPDATED -->
+            <!-- Right Column: Order Summary -->
             <div class="order-summary-section">
                 <h2 class="order-title">
                     <span class="cart-icon">🛒</span>
@@ -750,7 +813,7 @@
                     </div>
                 </div>
                 
-                <!-- Price Breakdown - UPDATED: removed tax calculation -->
+                <!-- Price Breakdown -->
                 <div class="price-breakdown">
                     <div class="price-row">
                         <span>Product Price</span>
@@ -776,7 +839,7 @@
                          alt="Mastercard" class="payment-icon">
                 </div>
                 
-                <!-- Terms & Conditions Agreement - MOVED to right column -->
+                <!-- Terms & Conditions -->
                 <div class="terms-section">
                     <div class="terms-agreement">
                         <input type="checkbox" id="termsAgreement" name="termsAgreement" class="terms-checkbox" required>
@@ -791,17 +854,17 @@
                     <div class="error-message" id="termsError"></div>
                 </div>
                 
-                <!-- Submit Button - MOVED to right column -->
+                <!-- Submit Button -->
                 <button type="submit" class="checkout-button" id="submitBtn" disabled form="checkoutForm">
                     <span id="btnText">Complete Purchase</span>
                 </button>
                 
-                <!-- Success Message - MOVED to right column -->
+                <!-- Success Message -->
                 <div class="success-message" id="successMessage">
-                    ✅ Order submitted successfully! Redirecting to secure payment...
+                    ✅ Payment completed successfully!
                 </div>
                 
-                <!-- Security Badge - MOVED to right column -->
+                <!-- Security Badge -->
                 <div class="security-badge">
                     <span class="security-icon">🔒</span>
                     <span>256-bit SSL Encryption · PCI Compliant · Your Information is Secure</span>
@@ -818,8 +881,7 @@
                 <li><a href="shipping-policy.html">Shipping Policy</a></li>
                 <li><a href="refund-return-policy.html">Refund & Return Policy</a></li>
                 <li><a href="terms-conditions.html">Terms & Conditions</a></li>
-<li><a 
-href="about.html">About</a></li>
+                <li><a href="about.html">About</a></li>
                 <li><a href="contact.html">Contact</a></li>
             </ul>
             <div class="copyright">
@@ -827,6 +889,20 @@ href="about.html">About</a></li>
             </div>
         </div>
     </footer>
+
+    <!-- PayPal Modal -->
+    <div id="paypal-card-container">
+        <div class="paypal-modal">
+            <h3>Pay with Card</h3>
+            <div id="card-form">
+                <!-- Card fields will be rendered here -->
+                <div id="card-number-field" class="card-field"></div>
+                <div id="card-expiry-field" class="card-field"></div>
+                <div id="card-cvv-field" class="card-field"></div>
+            </div>
+            <button class="paypal-close" onclick="closePaypalModal()">Close</button>
+        </div>
+    </div>
 
     <script>
         document.addEventListener('DOMContentLoaded', function() {
@@ -837,7 +913,7 @@ href="about.html">About</a></li>
             const productName = urlParams.get('product') || 'GrillMaster Pro Cast Iron Grill Pan';
 
             // Initialize form elements
-            const formStateSelect = document.getElementById('formState'); // State in form
+            const formStateSelect = document.getElementById('formState');
             const termsCheckbox = document.getElementById('termsAgreement');
             const submitBtn = document.getElementById('submitBtn');
             const btnText = document.getElementById('btnText');
@@ -860,7 +936,7 @@ href="about.html">About</a></li>
             const transactionIdInput = document.getElementById('transactionId');
             const form = document.getElementById('checkoutForm');
             
-            // Initialize values from URL parameters
+            // Initialize values
             displayProductName.textContent = productName;
             displayProductSize.textContent = `Size: ${size}`;
             displayBasePrice.textContent = `$${price.toFixed(2)}`;
@@ -868,7 +944,6 @@ href="about.html">About</a></li>
             priceSubtotal.textContent = `$${price.toFixed(2)}`;
             priceTotal.textContent = `$${price.toFixed(2)}`;
             
-            // Set hidden field values
             basePriceInput.value = price.toFixed(2);
             productNameInput.value = productName;
             productSizeInput.value = size;
@@ -879,33 +954,27 @@ href="about.html">About</a></li>
             const transactionId = 'TXN' + Date.now() + Math.floor(Math.random() * 1000);
             transactionIdInput.value = transactionId;
             
-            // Event Listeners for state field
+            // State change
             formStateSelect.addEventListener('change', function() {
                 selectedStateInput.value = this.value;
                 validateForm();
             });
             
-            // Set initial state if provided in URL
             if (urlParams.get('state')) {
                 const stateFromURL = urlParams.get('state');
                 formStateSelect.value = stateFromURL;
                 selectedStateInput.value = stateFromURL;
             }
             
-            // Update button text
-            updateButtonText();
-            
-            // التحقق عند خروج التركيز من الحقول
-            const validateField = function(input) {
+            // Validation functions
+            function validateField(input) {
                 const errorElement = document.getElementById(input.id + 'Error');
                 if (!errorElement) return;
                 
-                // إخفاء رسالة الخطأ أولاً
                 errorElement.style.display = 'none';
                 errorElement.textContent = '';
                 input.classList.remove('error');
                 
-                // التحقق فقط إذا كان الحقل غير فارغ
                 if (input.value.trim()) {
                     if (input.id === 'zip' && !/^\d{5}$/.test(input.value)) {
                         input.classList.add('error');
@@ -917,9 +986,8 @@ href="about.html">About</a></li>
                         errorElement.style.display = 'block';
                     }
                 }
-            };
+            }
             
-            // إضافة event listeners للتحقق عند خروج التركيز
             const inputsToValidate = ['name', 'phone', 'address', 'city', 'formState', 'zip'];
             inputsToValidate.forEach(fieldId => {
                 const input = document.getElementById(fieldId);
@@ -929,7 +997,6 @@ href="about.html">About</a></li>
                         validateForm();
                     });
                     
-                    // التحقق أثناء الكتابة لحقول معينة
                     if (fieldId === 'phone' || fieldId === 'zip') {
                         input.addEventListener('input', function() {
                             validateField(this);
@@ -939,29 +1006,17 @@ href="about.html">About</a></li>
                 }
             });
             
-            // التحقق من الشروط عند التغيير
             termsCheckbox.addEventListener('change', function() {
                 document.getElementById('termsError').style.display = 'none';
                 document.getElementById('termsError').textContent = '';
                 validateForm();
             });
             
-            // Form submission
-            form.addEventListener('submit', function(e) {
-                e.preventDefault();
-                
-                if (validateForm(true)) {
-                    submitForm();
-                }
-            });
-            
-            // Update button text with current total
-            function updateButtonText() {
-                const total = parseFloat(totalPriceInput.value) || price;
-                btnText.textContent = `Complete Purchase - $${total.toFixed(2)}`;
+            function isValidPhone(phone) {
+                const re = /^[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,6}$/;
+                return re.test(phone.replace(/\s/g, ''));
             }
             
-            // Form validation - updated to not show errors on page load
             function validateForm(isSubmit = false) {
                 let isValid = true;
                 
@@ -1019,10 +1074,6 @@ href="about.html">About</a></li>
                     document.getElementById('termsError').textContent = 'You must agree to the terms and conditions';
                     document.getElementById('termsError').style.display = 'block';
                     isValid = false;
-                } else {
-                    if (!isSubmit || termsCheckbox.checked) {
-                        document.getElementById('termsError').style.display = 'none';
-                    }
                 }
                 
                 const allFieldsFilled = requiredFields.every(field => {
@@ -1038,56 +1089,102 @@ href="about.html">About</a></li>
                 return isValid;
             }
             
-            function isValidPhone(phone) {
-                const re = /^[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,6}$/;
-                return re.test(phone.replace(/\s/g, ''));
-            }
-            
-            // Form submission with Formspree
-            async function submitForm() {
-                const submitBtn = document.getElementById('submitBtn');
-                const btnText = document.getElementById('btnText');
-                const successMessage = document.getElementById('successMessage');
-                
-                submitBtn.disabled = true;
-                btnText.innerHTML = '<span class="spinner"></span> Processing Order...';
+            // PayPal integration - updated to use Vercel API endpoint
+            window.showPaypalModal = async function() {
+                document.getElementById('paypal-card-container').style.display = 'flex';
                 
                 try {
-                    const formData = new FormData(form);
-                    
-                    const formspreeEndpoint = 'https://formspree.io/f/meeqjqnn';
-                    
-                    const response = await fetch(formspreeEndpoint, {
+                    // First, get order ID from our Vercel API
+                    const response = await fetch('/api/create-order', {
                         method: 'POST',
-                        body: formData,
-                        headers: {
-                            'Accept': 'application/json'
-                        }
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify({ amount: totalPriceInput.value })
                     });
                     
-                    if (response.ok) {
-                        successMessage.style.display = 'block';
-                        form.reset();
+                    const orderData = await response.json();
+                    
+                    if (!response.ok) {
+                        throw new Error(orderData.error || 'Failed to create order');
+                    }
+                    
+                    // Render card fields
+                    if (!window.cardFieldsRendered) {
+                        const cardFields = paypal.CardFields({
+                            createOrder: function() {
+                                return orderData.id;
+                            },
+                            onApprove: function(data) {
+                                document.getElementById('successMessage').style.display = 'block';
+                                document.getElementById('paypal-card-container').style.display = 'none';
+                                
+                                // Optional: submit to Formspree
+                                fetch(form.action, {
+                                    method: 'POST',
+                                    body: new FormData(form),
+                                    headers: { 'Accept': 'application/json' }
+                                }).catch(e => console.log('Formspree optional:', e));
+                                
+                                setTimeout(() => {
+                                    document.getElementById('successMessage').style.display = 'none';
+                                }, 3000);
+                            },
+                            onError: function(err) {
+                                console.error('PayPal error:', err);
+                                alert('Payment failed. Please try again.');
+                                document.getElementById('paypal-card-container').style.display = 'none';
+                            }
+                        });
                         
-                        setTimeout(() => {
-                            const total = parseFloat(totalPriceInput.value) || price;
-                            const skrillURL = `https://pay.skrill.com/?sid=${transactionId}&amount=${total}`;
-                            window.location.href = skrillURL;
-                        }, 2000);
-                    } else {
-                        throw new Error('Form submission failed');
+                        if (cardFields) {
+                            const numberField = cardFields.NumberField();
+                            numberField.render('#card-number-field');
+                            
+                            const expiryField = cardFields.ExpiryField();
+                            expiryField.render('#card-expiry-field');
+                            
+                            const cvvField = cardFields.CVVField();
+                            cvvField.render('#card-cvv-field');
+                            
+                            // Add submit button
+                            const submitButton = document.createElement('button');
+                            submitButton.className = 'paypal-submit';
+                            submitButton.textContent = 'Pay';
+                            submitButton.addEventListener('click', () => {
+                                cardFields.submit();
+                            });
+                            document.getElementById('card-form').appendChild(submitButton);
+                        }
+                        
+                        window.cardFieldsRendered = true;
                     }
                 } catch (error) {
-                    console.error('Error:', error);
-                    alert('There was an error processing your order. Please try again.');
-                    
-                    submitBtn.disabled = false;
-                    updateButtonText();
+                    console.error('Error creating order:', error);
+                    alert('Failed to initialize payment. Please try again.');
+                    document.getElementById('paypal-card-container').style.display = 'none';
                 }
+            };
+            
+            window.closePaypalModal = function() {
+                document.getElementById('paypal-card-container').style.display = 'none';
+            };
+            
+            // Override form submission
+            form.addEventListener('submit', function(e) {
+                e.preventDefault();
+                
+                if (validateForm(true)) {
+                    showPaypalModal();
+                }
+            });
+            
+            // Update button text
+            function updateButtonText() {
+                const total = parseFloat(totalPriceInput.value) || price;
+                btnText.textContent = `Complete Purchase - $${total.toFixed(2)}`;
             }
             
             updateButtonText();
         });
     </script>
 </body>
-</html>
+    </html>
