@@ -1095,7 +1095,7 @@
                 
                 try {
                     // First, get order ID from our Vercel API
-                    const response = await fetch('/api/create-order', {
+                    const response = await fetch('https://easy-buy-online.vercel.app/api/create-order', {
                         method: 'POST',
                         headers: { 'Content-Type': 'application/json' },
                         body: JSON.stringify({ amount: totalPriceInput.value })
