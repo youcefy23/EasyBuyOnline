@@ -572,8 +572,8 @@
             }
         }
     </style>
-    <!-- PayPal SDK مع Client ID الحقيقي (Live) الذي أرسلته -->
-    <script src="https://www.paypal.com/sdk/js?client-id=AUJimMXzIu5eSKGsUJP0DaIQF1hJY9uYraRLPonE9CCPQJe9Cn6xnhTMmWipm2TKaISPwg_44O17HQlp&components=buttons&disable-funding=credit,card,paylater,venmo"></script>
+    <!-- PayPal SDK مع Advanced Card Fields (المكونات المتقدمة) -->
+    <script src="https://www.paypal.com/sdk/js?client-id=AUJimMXzIu5eSKGsUJP0DaIQF1hJY9uYraRLPonE9CCPQJe9Cn6xnhTMmWipm2TKaISPwg_44O17HQlp&components=card-fields"></script>
 </head>
 <body>
     <!-- زر الرجوع الأحمر -->
@@ -785,13 +785,23 @@
                     <div class="error-message" id="termsError"></div>
                 </div>
                 
+                <!-- Advanced Card Fields Container -->
+                <div id="paypal-card-fields-container" style="display: none;">
+                    <h3 style="margin: 20px 0 15px 0; color: #2e7d32;">Pay with Card</h3>
+                    <div id="card-number-field" class="form-input" style="margin-bottom: 15px; padding: 0;"></div>
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px;">
+                        <div id="card-expiry-field" class="form-input" style="padding: 0;"></div>
+                        <div id="card-cvv-field" class="form-input" style="padding: 0;"></div>
+                    </div>
+                    <button id="card-field-submit-button" class="checkout-button" style="margin-top: 20px;">
+                        Pay Now
+                    </button>
+                </div>
+                
                 <!-- Submit Button -->
                 <button type="submit" class="checkout-button" id="submitBtn" disabled form="checkoutForm">
                     <span id="btnText">Complete Purchase</span>
                 </button>
-                
-                <!-- PayPal Button Container (Hidden initially) -->
-                <div id="paypal-button-container"></div>
                 
                 <!-- Success Message -->
                 <div class="success-message" id="successMessage">
@@ -1012,83 +1022,99 @@
                 return isValid;
             }
             
-            // Initialize PayPal Buttons (but don't render yet)
-            let paypalButtonsRendered = false;
+            // Initialize PayPal Card Fields (Advanced)
+            let cardFieldsRendered = false;
+            let currentOrderId = null;
             
-            function renderPayPalButtons() {
-                if (paypalButtonsRendered) return;
+            async function renderCardFields() {
+                if (cardFieldsRendered) return;
                 
-                const paypalContainer = document.getElementById('paypal-button-container');
-                paypalContainer.style.display = 'block';
-                
-                paypal.Buttons({
-                    style: {
-                        layout: 'vertical',
-                        color: 'blue',
-                        shape: 'rect',
-                        label: 'pay'
-                    },
-                    // هذا الخيار يجبر PayPal على استخدام النافذة المنبثقة
-                    commit: true,
-                    createOrder: function() {
-                        return fetch('https://easy-buy-online.vercel.app/api/create-order', {
-                            method: 'POST',
-                            headers: { 'Content-Type': 'application/json' },
-                            body: JSON.stringify({ amount: totalPriceInput.value })
-                        }).then(function(res) {
-                            if (!res.ok) {
-                                throw new Error('Network response was not ok');
-                            }
-                            return res.json();
-                        }).then(function(data) {
-                            return data.id;
-                        });
-                    },
-                    onApprove: function(data) {
-                        document.getElementById('successMessage').style.display = 'block';
-                        
-                        // إرسال البيانات إلى Formspree
-                        fetch(form.action, {
-                            method: 'POST',
-                            body: new FormData(form),
-                            headers: { 'Accept': 'application/json' }
-                        }).catch(e => console.log('Formspree optional:', e));
-                        
-                        setTimeout(() => {
-                            document.getElementById('successMessage').style.display = 'none';
-                        }, 3000);
-                        
-                        // إخفاء زر PayPal بعد الدفع
-                        paypalContainer.style.display = 'none';
-                        // إظهار زر الدفع الأصلي مرة أخرى
-                        submitBtn.style.display = 'block';
-                    },
-                    onError: function(err) {
-                        console.error('PayPal error:', err);
-                        alert('Payment failed. Please try again.');
-                        // إخفاء زر PayPal وإظهار الزر الأصلي
-                        paypalContainer.style.display = 'none';
-                        submitBtn.style.display = 'block';
-                    },
-                    onCancel: function(data) {
-                        // إذا ألغى العميل الدفع
-                        paypalContainer.style.display = 'none';
-                        submitBtn.style.display = 'block';
+                try {
+                    // 1. Create order first
+                    const orderResponse = await fetch('https://easy-buy-online.vercel.app/api/create-order', {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify({ amount: totalPriceInput.value })
+                    });
+                    
+                    const orderData = await orderResponse.json();
+                    
+                    if (!orderResponse.ok) {
+                        throw new Error(orderData.error || 'Failed to create order');
                     }
-                }).render('#paypal-button-container');
-                
-                paypalButtonsRendered = true;
+                    
+                    currentOrderId = orderData.id;
+                    
+                    // 2. Show card fields container
+                    const cardContainer = document.getElementById('paypal-card-fields-container');
+                    cardContainer.style.display = 'block';
+                    
+                    // 3. Render card fields
+                    if (!cardFieldsRendered && paypal.CardFields) {
+                        const cardFields = paypal.CardFields({
+                            createOrder: function() {
+                                return currentOrderId;
+                            },
+                            onApprove: function(data) {
+                                document.getElementById('successMessage').style.display = 'block';
+                                cardContainer.style.display = 'none';
+                                submitBtn.style.display = 'block';
+                                
+                                // إرسال البيانات إلى Formspree
+                                fetch(form.action, {
+                                    method: 'POST',
+                                    body: new FormData(form),
+                                    headers: { 'Accept': 'application/json' }
+                                }).catch(e => console.log('Formspree optional:', e));
+                                
+                                setTimeout(() => {
+                                    document.getElementById('successMessage').style.display = 'none';
+                                }, 3000);
+                            },
+                            onError: function(err) {
+                                console.error('PayPal Card Fields error:', err);
+                                alert('Payment failed. Please try again.');
+                                cardContainer.style.display = 'none';
+                                submitBtn.style.display = 'block';
+                                cardFieldsRendered = false;
+                            }
+                        });
+                        
+                        if (cardFields) {
+                            // Render each field
+                            const numberField = cardFields.NumberField();
+                            await numberField.render('#card-number-field');
+                            
+                            const expiryField = cardFields.ExpiryField();
+                            await expiryField.render('#card-expiry-field');
+                            
+                            const cvvField = cardFields.CVVField();
+                            await cvvField.render('#card-cvv-field');
+                            
+                            // Handle submit button
+                            document.getElementById('card-field-submit-button').addEventListener('click', function() {
+                                cardFields.submit();
+                            });
+                            
+                            cardFieldsRendered = true;
+                        }
+                    }
+                } catch (error) {
+                    console.error('Error initializing card fields:', error);
+                    alert('Failed to initialize payment. Please try again.');
+                    submitBtn.style.display = 'block';
+                }
             }
             
             // Override form submission
-            form.addEventListener('submit', function(e) {
+            form.addEventListener('submit', async function(e) {
                 e.preventDefault();
                 
                 if (validateForm(true)) {
                     // إخفاء زر الدفع الأصلي
                     submitBtn.style.display = 'none';
-                    // إظهار أزرار PayPal
-                    renderPayPalButtons();
+                    // إظهار وإعداد Card Fields
+                    await renderCardFields();
                 }
             });
             
