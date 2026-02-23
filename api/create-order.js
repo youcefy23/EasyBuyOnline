@@ -1,28 +1,29 @@
-// api/create-order.js
-// هذا الملف يستخدم CommonJS (module.exports) بدلاً من ESM (export default)
+// File: api/create-order.js
+// This is a complete Vercel Serverless Function for PayPal Smart Buttons
+// Updated with LIVE PayPal credentials
 
 module.exports = async (req, res) => {
-    // السماح فقط بطلبات POST
+    // Allow only POST requests
     if (req.method !== 'POST') {
         return res.status(405).json({ error: 'Method not allowed' });
     }
 
     try {
-        // الحصول على المبلغ من الطلب
+        // Get the amount from the request body
         const { amount } = req.body;
         
         if (!amount) {
             return res.status(400).json({ error: 'Amount is required' });
         }
 
-        // بيانات اعتماد PayPal (خاصة بـ Sandbox)
-        const PAYPAL_CLIENT_ID = "AZPJ5ocWFTkYatGx7Ay5JC7ctXMtbLXJ-ab8Jjpfy3J0vVY6zzCPfdSq1IX0c2Tvx17ZU5n82XnSaNJo";
-        const PAYPAL_CLIENT_SECRET = "ECzIsk5Sbiw86lRUjOpk92LoGE6IbWf4qirbe0ufPaGE-0sfshR-kpcugmRp5RmIZ2ozJDlGVtbt4m68";
+        // PayPal API credentials (LIVE credentials you provided)
+        const PAYPAL_CLIENT_ID = "AUJimMXzIu5eSKGsUJP0DaIQF1hJY9uYraRLPonE9CCPQJe9Cn6xnhTMmWipm2TKaISPwg_44O17HQlp";
+        const PAYPAL_CLIENT_SECRET = "EDeMUdBz_jx8sOI3MY6R9aCoZgkdf__OhjrjFIXQPB7H0AvBpY9WuiDwDfLbtgRxetveaIjfpeAwRh8O";
         
-        // رابط PayPal API (sandbox)
-        const PAYPAL_API = "https://api-m.sandbox.paypal.com";
+        // PayPal API base URL (LIVE - not sandbox)
+        const PAYPAL_API = "https://api-m.paypal.com";
 
-        // 1. الحصول على رمز الوصول (access token) من PayPal
+        // 1. Get access token from PayPal
         const auth = Buffer.from(`${PAYPAL_CLIENT_ID}:${PAYPAL_CLIENT_SECRET}`).toString('base64');
         
         const tokenResponse = await fetch(`${PAYPAL_API}/v1/oauth2/token`, {
@@ -43,7 +44,7 @@ module.exports = async (req, res) => {
 
         const accessToken = tokenData.access_token;
 
-        // 2. إنشاء طلب (order) في PayPal
+        // 2. Create an order
         const orderResponse = await fetch(`${PAYPAL_API}/v2/checkout/orders`, {
             method: 'POST',
             headers: {
@@ -71,7 +72,7 @@ module.exports = async (req, res) => {
             return res.status(500).json({ error: 'Failed to create PayPal order' });
         }
 
-        // 3. إعادة Order ID إلى الواجهة الأمامية
+        // 3. Return the order ID to the frontend
         return res.status(200).json({ id: orderData.id });
 
     } catch (error) {
